@@ -1,0 +1,13 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Blog Response"""
+type BlogModel {
+  _id: String!
+  user: String!
+}
+
+type Query {
+  blog: [BlogModel!]!
+}
