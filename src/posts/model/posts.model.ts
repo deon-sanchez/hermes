@@ -5,7 +5,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 @Schema({ timestamps: true }) // Enable automatic handling of createdAt and updatedAt
 export class PostsModel {
   @Field((type) => String)
-  @Prop({ type: String, required: true }) // Assuming _id is automatically handled by Mongoose
+  @Prop({ type: String, required: true })
   _id: string;
 
   @Field((type) => String)
@@ -28,7 +28,7 @@ export class PostsModel {
   createdAt: Date; // No need for @Prop decorator, handled by timestamps option
 
   @Field((type) => Date)
-  updatedAt: Date; // No need for @Prop decorator, handled by timestamps option
+  updatedAt: Date;
 }
 
 export const PostsSchema = SchemaFactory.createForClass(PostsModel);
