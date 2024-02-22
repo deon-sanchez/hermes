@@ -13,4 +13,4 @@ import { MongooseModule } from '@nestjs/mongoose';
   providers: [CommentsService, CommentsResolver],
   exports: [CommentsService],
 })
-export class UsersModule {}
+export class CommentsModule {}

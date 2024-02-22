@@ -2,12 +2,115 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""Categories Response"""
+type CategoriesModel {
+  _id: String!
+  createdAt: DateTime!
+  description: String!
+  name: String!
+  updatedAt: DateTime!
+}
+
+"""Comments Response"""
+type CommentsModel {
+  _id: String!
+  content: String!
+  createdAt: DateTime!
+  postId: String!
+  updatedAt: DateTime!
+  userId: String!
+}
+
+input CreateCategoryInput {
+  description: String!
+  name: String!
+}
+
+input CreateCommentInput {
+  content: String!
+  postId: String!
+  userId: String!
+}
+
+input CreatePostInput {
+  categoryId: String!
+  content: String!
+  title: String!
+  userId: String!
+}
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  createCategory(createCategoryInput: CreateCategoryInput!): CategoriesModel!
+  createComment(createCommentInput: CreateCommentInput!): CommentsModel!
+  createPost(createPostInput: CreatePostInput!): PostsModel!
+  createUser(createUserInput: CreateUserInput!): UsersModel!
+  deleteCategory(id: String!): CategoriesModel!
+  deleteComment(id: String!): CommentsModel!
+  deletePost(id: String!): PostsModel!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): CategoriesModel!
+  updateComment(updateCommentInput: UpdateCommentInput!): CommentsModel!
+  updatePost(updatePostInput: UpdatePostInput!): PostsModel!
+}
+
 """Posts Response"""
 type PostsModel {
   _id: String!
-  user: String!
+  categoryId: String!
+  content: String!
+  createdAt: DateTime!
+  title: String!
+  updatedAt: DateTime!
+  userId: String!
 }
 
 type Query {
-  Posts: [PostsModel!]!
+  categories: [CategoriesModel!]!
+  category(id: String!): CategoriesModel!
+  comment(id: String!): CommentsModel!
+  comments: [CommentsModel!]!
+  getAllUsers: [UsersModel!]!
+  getUser(id: String!): UsersModel!
+  post(id: String!): PostsModel!
+  posts: [PostsModel!]!
+}
+
+input UpdateCategoryInput {
+  description: String
+  id: ID!
+  name: String
+}
+
+input UpdateCommentInput {
+  content: String
+  id: ID!
+  postId: String
+  userId: String
+}
+
+input UpdatePostInput {
+  categoryId: String
+  content: String
+  id: ID!
+  title: String
+  userId: String
+}
+
+"""Users Response"""
+type UsersModel {
+  _id: ID!
+  createdAt: DateTime!
+  email: String!
+  name: String!
+  updatedAt: DateTime!
 }
