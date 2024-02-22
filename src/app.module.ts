@@ -2,8 +2,15 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { PostModule } from './post/post.module';
+import { PostsModule } from './Posts/Posts.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { CommentsResolver } from './comments/comments.resolver';
+import { CommentsService } from './comments/comments.service';
+import { CommentsModule } from './comments/comments.module';
+import { UsersModule } from './users/users.module';
+import { CategoriesResolver } from './categories/categories.resolver';
+import { CategoriesService } from './categories/categories.service';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -41,9 +48,12 @@ import { MongooseModule } from '@nestjs/mongoose';
       }),
       inject: [ConfigService],
     }),
-    PostModule,
+    PostsModule,
+    CommentsModule,
+    UsersModule,
+    CategoriesModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [CommentsResolver, CommentsService, CategoriesResolver, CategoriesService],
 })
 export class AppModule {}

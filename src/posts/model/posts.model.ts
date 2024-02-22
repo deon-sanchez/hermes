@@ -2,11 +2,11 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type PostDocument = PostModel & Document;
+export type PostsDocument = PostsModel & Document;
 
-@ObjectType({ description: 'Post Response' })
+@ObjectType({ description: 'Posts Response' })
 @Schema()
-export class PostModel extends Document {
+export class PostsModel extends Document {
   @Field((type) => String)
   _id: string;
 
@@ -15,4 +15,4 @@ export class PostModel extends Document {
   user: string;
 }
 
-export const PostSchema = SchemaFactory.createForClass(PostModel);
+export const PostsSchema = SchemaFactory.createForClass(PostsModel);
