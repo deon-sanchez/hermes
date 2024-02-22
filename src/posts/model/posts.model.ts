@@ -1,39 +1,35 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-
-export type PostsDocument = PostsModel & Document;
 
 @ObjectType({ description: 'Posts Response' })
-@Schema()
-export class PostsModel extends Document {
+@Schema({ timestamps: true }) // Enable automatic handling of createdAt and updatedAt
+export class PostsModel {
   @Field((type) => String)
-  @Prop({ type: String })
+  @Prop({ type: String, required: true }) // Assuming _id is automatically handled by Mongoose
   _id: string;
 
   @Field((type) => String)
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   title: string;
 
   @Field((type) => String)
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   content: string;
 
   @Field((type) => String)
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   userId: string;
 
   @Field((type) => String)
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   categoryId: string;
 
-  @Field((type) => String)
-  @Prop({ type: String })
-  createdAt: string;
+  @Field((type) => Date)
+  createdAt: Date; // No need for @Prop decorator, handled by timestamps option
 
-  @Field((type) => String)
-  @Prop({ type: String })
-  updatedAt: string;
+  @Field((type) => Date)
+  updatedAt: Date; // No need for @Prop decorator, handled by timestamps option
 }
 
 export const PostsSchema = SchemaFactory.createForClass(PostsModel);
+export type PostsDocument = PostsModel & Document;

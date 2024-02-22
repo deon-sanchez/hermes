@@ -1,35 +1,31 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, HideField, ID, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-
-export type UsersDocument = UsersModel & Document;
 
 @ObjectType({ description: 'Users Response' })
-@Schema()
-export class UsersModel extends Document {
-  @Field((type) => String)
-  @Prop({ type: String })
+@Schema({ timestamps: true })
+export class UsersModel {
+  @Field((type) => ID)
+  @Prop({ type: String, required: true })
   _id: string;
 
   @Field((type) => String)
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   name: string;
 
   @Field((type) => String)
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   email: string;
 
-  @Field((type) => String)
-  @Prop({ type: String })
+  @HideField()
+  @Prop({ type: String, required: true })
   password: string;
 
-  @Field((type) => String)
-  @Prop({ type: String })
-  createdAt: string;
+  @Field((type) => Date)
+  createdAt: Date;
 
-  @Field((type) => String)
-  @Prop({ type: String })
-  updatedAt: string;
+  @Field((type) => Date)
+  updatedAt: Date;
 }
 
 export const UsersSchema = SchemaFactory.createForClass(UsersModel);
+export type UsersDocument = UsersModel & Document;

@@ -1,31 +1,27 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-
-export type CategoriesDocument = CategoriesModel & Document;
 
 @ObjectType({ description: 'Categories Response' })
-@Schema()
-export class CategoriesModel extends Document {
+@Schema({ timestamps: true })
+export class CategoriesModel {
   @Field((type) => String)
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   _id: string;
 
   @Field((type) => String)
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   name: string;
 
   @Field((type) => String)
-  @Prop({ type: String })
+  @Prop({ type: String, required: true })
   description: string;
 
-  @Field((type) => String)
-  @Prop({ type: String })
-  createdAt: string;
+  @Field((type) => Date)
+  createdAt: Date;
 
-  @Field((type) => String)
-  @Prop({ type: String })
-  updatedAt: string;
+  @Field((type) => Date)
+  updatedAt: Date;
 }
 
 export const CategoriesSchema = SchemaFactory.createForClass(CategoriesModel);
+export type CategoriesDocument = CategoriesModel & Document;
