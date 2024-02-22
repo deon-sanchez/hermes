@@ -1,11 +1,10 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @ObjectType({ description: 'Posts Response' })
 @Schema({ timestamps: true }) // Enable automatic handling of createdAt and updatedAt
 export class PostsModel {
-  @Field((type) => String)
-  @Prop({ type: String, required: true })
+  @Field((type) => ID)
   _id: string;
 
   @Field((type) => String)
@@ -16,11 +15,11 @@ export class PostsModel {
   @Prop({ type: String, required: true })
   content: string;
 
-  @Field((type) => String)
+  @Field((type) => ID)
   @Prop({ type: String, required: true })
   userId: string;
 
-  @Field((type) => String)
+  @Field((type) => ID)
   @Prop({ type: String, required: true })
   categoryId: string;
 

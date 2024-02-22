@@ -1,11 +1,10 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @ObjectType({ description: 'Comments Response' })
 @Schema({ timestamps: true })
 export class CommentsModel {
-  @Field((type) => String)
-  @Prop({ type: String, required: true })
+  @Field((type) => ID)
   _id: string;
 
   @Field((type) => String)

@@ -4,7 +4,7 @@
 
 """Categories Response"""
 type CategoriesModel {
-  _id: String!
+  _id: ID!
   createdAt: DateTime!
   description: String!
   name: String!
@@ -13,7 +13,7 @@ type CategoriesModel {
 
 """Comments Response"""
 type CommentsModel {
-  _id: String!
+  _id: ID!
   content: String!
   createdAt: DateTime!
   postId: String!
@@ -65,13 +65,13 @@ type Mutation {
 
 """Posts Response"""
 type PostsModel {
-  _id: String!
-  categoryId: String!
+  _id: ID!
+  categoryId: ID!
   content: String!
   createdAt: DateTime!
   title: String!
   updatedAt: DateTime!
-  userId: String!
+  userId: ID!
 }
 
 type Query {

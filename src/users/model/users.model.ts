@@ -5,7 +5,6 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 @Schema({ timestamps: true })
 export class UsersModel {
   @Field((type) => ID)
-  @Prop({ type: String, required: true })
   _id: string;
 
   @Field((type) => String)
