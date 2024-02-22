@@ -5,9 +5,9 @@ import { PostsModel } from './posts.model';
 
 @ObjectType({ description: 'Users Response' })
 @Schema({ timestamps: true })
-export class UsersModel extends Document {
+export class UsersModel {
   @Field((type) => String)
-  _id: string;
+  _id: MongooseSchema.Types.ObjectId;
 
   @Field((type) => String)
   @Prop({ type: String, required: true })
@@ -27,9 +27,8 @@ export class UsersModel extends Document {
   @Field((type) => Date)
   updatedAt: Date;
 
-  // @Field((type) => PostsModel, { nullable: true })
-  // @Prop({ type: MongooseSchema.Types.ObjectId, ref: PostsModel.name })
-  // posts: PostsModel;
+  // @Prop({ type: [MongooseSchema.Types.ObjectId], ref: PostsModel.name })
+  // posts: PostsModel[];
 }
 
 export const UsersSchema = SchemaFactory.createForClass(UsersModel);

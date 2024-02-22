@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Schema as MongooseSchema } from 'mongoose';
 import { PostsDocument, PostsModel } from 'src/models/posts.model';
 import {
   CreatePostInput,
@@ -22,9 +22,11 @@ export class PostsService {
 
   async findAll(findPostsInput: FindPostsInput): Promise<PostsModel[]> {
     if (findPostsInput?.userId) {
-      return this.postModel.find({ userId: findPostsInput.userId }).exec();
+      return await this.postModel
+        .find({ userId: findPostsInput.userId })
+        .exec();
     } else if (findPostsInput?.categoryId) {
-      return this.postModel
+      return await this.postModel
         .find({ categoryId: findPostsInput.categoryId })
         .exec();
     }
@@ -33,14 +35,16 @@ export class PostsService {
 
   async findOne(findPostInput: FindPostInput): Promise<PostsModel> {
     if (findPostInput?.id) {
-      return this.postModel.findById(findPostInput.id).exec();
+      return await this.postModel.findById(findPostInput.id).exec();
     } else if (findPostInput?.userId) {
-      return this.postModel.findOne({ userId: findPostInput.userId }).exec();
+      return await this.postModel
+        .findOne({ userId: findPostInput.userId })
+        .exec();
     }
   }
 
   async update(
-    id: string,
+    id: MongooseSchema.Types.ObjectId,
     updatePostDto: UpdatePostInput,
   ): Promise<PostsModel> {
     return this.postModel

@@ -1,9 +1,10 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
+import { Schema as MongooseSchema } from 'mongoose';
 
 @InputType({ description: 'Find one post by post id or user id' })
 export class FindPostInput {
-  @Field(() => ID, { nullable: true })
-  id?: string;
+  @Field(() => String, { nullable: true })
+  id?: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
   userId?: string;
@@ -37,8 +38,8 @@ export class CreatePostInput {
 
 @InputType()
 export class UpdatePostInput {
-  @Field(() => ID)
-  id: string;
+  @Field(() => String)
+  id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
   title?: string;

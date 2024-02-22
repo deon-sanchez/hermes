@@ -10,6 +10,7 @@ import { UsersDocument, UsersModel } from 'src/models/users.model';
 import { CreateUserInput } from 'src/dtos/users.input';
 import { PostsService } from '../posts/posts.service';
 import { UsersService } from './users.service';
+import { PostsModel } from 'src/models/posts.model';
 
 @Resolver((of) => UsersModel)
 export class UsersResolver {
@@ -33,8 +34,10 @@ export class UsersResolver {
     return this.usersService.create(createUserInput);
   }
 
-  // @ResolveField()
+  // @ResolveField(() => [PostsModel])
   // async posts(@Parent() user: UsersDocument) {
-  //   return await this.postsServices.findByUserId(user._id);
+  //   const u = await user.populate({ path: 'posts', model: PostsModel.name });
+  //   const x = await this.postsServices.findAll({ userId: user._id });
+  //   return x;
   // }
 }
