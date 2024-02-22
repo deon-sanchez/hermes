@@ -1,4 +1,14 @@
 import { Field, InputType } from '@nestjs/graphql';
+import { Schema as MongooseSchema } from 'mongoose';
+
+@InputType()
+export class FindUserInput {
+  @Field(() => String, { nullable: true })
+  _id: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String, { nullable: true })
+  email: string;
+}
 
 @InputType()
 export class CreateUserInput {

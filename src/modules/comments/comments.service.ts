@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Schema as MongooseSchema } from 'mongoose';
 import { CommentsDocument, CommentsModel } from 'src/models/comments.model';
 import {
   CreateCommentInput,
@@ -28,7 +28,7 @@ export class CommentsService {
   }
 
   async update(
-    id: string,
+    id: MongooseSchema.Types.ObjectId,
     updateCommentDto: UpdateCommentInput,
   ): Promise<CommentsModel> {
     return this.commentModel

@@ -17,9 +17,11 @@ export class PostsModel extends Document {
   content: string;
 
   @Field((type) => String)
+  @Prop({ type: MongooseSchema.Types.ObjectId, required: true })
   userId: MongooseSchema.Types.ObjectId;
 
   @Field((type) => String)
+  @Prop({ type: MongooseSchema.Types.ObjectId, required: true })
   categoryId: MongooseSchema.Types.ObjectId;
 
   @Field((type) => Date)

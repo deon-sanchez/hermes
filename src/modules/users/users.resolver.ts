@@ -7,7 +7,7 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { UsersDocument, UsersModel } from 'src/models/users.model';
-import { CreateUserInput } from 'src/dtos/users.input';
+import { CreateUserInput, FindUserInput } from 'src/dtos/users.input';
 import { PostsService } from '../posts/posts.service';
 import { UsersService } from './users.service';
 import { PostsModel } from 'src/models/posts.model';
@@ -25,11 +25,13 @@ export class UsersResolver {
   }
 
   @Query((returns) => UsersModel)
-  user(@Args('id') id: string): Promise<UsersModel> {
-    return this.usersService.findOne(id);
+  user(
+    @Args('findUserInput') findUserInput: FindUserInput,
+  ): Promise<UsersModel> {
+    return this.usersService.findOne(findUserInput);
   }
 
-  @Mutation(() => UsersModel)
+  @Mutation((returns) => UsersModel)
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.usersService.create(createUserInput);
   }

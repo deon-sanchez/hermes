@@ -51,16 +51,20 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-"""Find one post by post id or user id"""
-input FindPostInput {
-  id: String
+input FindCategoryInput {
+  _id: String!
+}
+
+"""Find posts"""
+input FindPostsInput {
+  _id: String
+  categoryId: String
   userId: String
 }
 
-"""Find all posts or find all post by user id or category id"""
-input FindPostsInput {
-  categoryId: String
-  userId: String
+input FindUserInput {
+  _id: String
+  email: String
 }
 
 type Mutation {
@@ -68,9 +72,9 @@ type Mutation {
   createComment(createCommentInput: CreateCommentInput!): CommentsModel!
   createPost(createPostInput: CreatePostInput!): PostsModel!
   createUser(createUserInput: CreateUserInput!): UsersModel!
-  deleteCategory(id: String!): CategoriesModel!
+  deleteCategory(_id: String!): CategoriesModel!
   deleteComment(id: String!): CommentsModel!
-  deletePost(id: String!): PostsModel!
+  deletePost(_id: String!): PostsModel!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): CategoriesModel!
   updateComment(updateCommentInput: UpdateCommentInput!): CommentsModel!
   updatePost(updatePostInput: UpdatePostInput!): PostsModel!
@@ -89,32 +93,32 @@ type PostsModel {
 
 type Query {
   categories: [CategoriesModel!]!
-  category(id: String!): CategoriesModel!
+  category(findCategoryInput: FindCategoryInput!): CategoriesModel!
   comment(id: String!): CommentsModel!
   comments: [CommentsModel!]!
-  post(findPostInput: FindPostInput!): PostsModel!
-  posts(FindPostsInput: FindPostsInput): [PostsModel!]!
-  user(id: String!): UsersModel!
+  post(findPostsInput: FindPostsInput!): PostsModel!
+  posts(findPostsInput: FindPostsInput): [PostsModel!]!
+  user(findUserInput: FindUserInput!): UsersModel!
   users: [UsersModel!]!
 }
 
 input UpdateCategoryInput {
+  _id: String!
   description: String
-  id: ID!
   name: String
 }
 
 input UpdateCommentInput {
   content: String
-  id: ID!
+  id: String!
   postId: String
   userId: String
 }
 
 input UpdatePostInput {
+  _id: String!
   categoryId: String
   content: String
-  id: String!
   title: String
   userId: String
 }

@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Schema as MongooseSchema } from 'mongoose';
 import {
   CategoriesDocument,
   CategoriesModel,
 } from 'src/models/categories.model';
 import {
   CreateCategoryInput,
+  FindCategoryInput,
   UpdateCategoryInput,
 } from 'src/dtos/categories.input';
 
@@ -28,12 +29,14 @@ export class CategoriesService {
     return this.categoryModel.find().exec();
   }
 
-  async findOne(id: string): Promise<CategoriesModel> {
-    return this.categoryModel.findById(id).exec();
+  async findOne(
+    findCategoryInput: FindCategoryInput,
+  ): Promise<CategoriesModel> {
+    return this.categoryModel.findById(findCategoryInput._id).exec();
   }
 
   async update(
-    id: string,
+    id: MongooseSchema.Types.ObjectId,
     updateCategoryDto: UpdateCategoryInput,
   ): Promise<CategoriesModel> {
     return this.categoryModel

@@ -1,24 +1,18 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 
-@InputType({ description: 'Find one post by post id or user id' })
-export class FindPostInput {
-  @Field(() => String, { nullable: true })
-  id?: MongooseSchema.Types.ObjectId;
-
-  @Field(() => String, { nullable: true })
-  userId?: string;
-}
-
 @InputType({
-  description: 'Find all posts or find all post by user id or category id',
+  description: 'Find posts',
 })
 export class FindPostsInput {
   @Field(() => String, { nullable: true })
-  userId?: string;
+  _id?: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
-  categoryId?: string;
+  userId?: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String, { nullable: true })
+  categoryId?: MongooseSchema.Types.ObjectId;
 }
 
 @InputType({ description: 'Create a post' })
@@ -39,7 +33,7 @@ export class CreatePostInput {
 @InputType()
 export class UpdatePostInput {
   @Field(() => String)
-  id: MongooseSchema.Types.ObjectId;
+  _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
   title?: string;
@@ -48,8 +42,8 @@ export class UpdatePostInput {
   content?: string;
 
   @Field(() => String, { nullable: true })
-  userId?: string;
+  userId?: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
-  categoryId?: string;
+  categoryId?: MongooseSchema.Types.ObjectId;
 }

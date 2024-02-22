@@ -3,7 +3,6 @@ import { PostsService } from './posts.service';
 import { PostsModel } from 'src/models/Posts.model';
 import {
   CreatePostInput,
-  FindPostInput,
   FindPostsInput,
   UpdatePostInput,
 } from 'src/dtos/posts.input';
@@ -14,15 +13,15 @@ export class PostsResolver {
 
   @Query(() => PostsModel)
   async post(
-    @Args('findPostInput')
-    findPostInput: FindPostInput,
+    @Args('findPostsInput')
+    findPostsInput: FindPostsInput,
   ): Promise<PostsModel> {
-    return this.postsService.findOne(findPostInput);
+    return this.postsService.findOne(findPostsInput);
   }
 
   @Query(() => [PostsModel])
   async posts(
-    @Args('FindPostsInput', { nullable: true }) findPostsInput?: FindPostsInput,
+    @Args('findPostsInput', { nullable: true }) findPostsInput?: FindPostsInput,
   ): Promise<PostsModel[]> {
     return this.postsService.findAll(findPostsInput);
   }
@@ -38,13 +37,13 @@ export class PostsResolver {
   async updatePost(
     @Args('updatePostInput') updatePostInput: UpdatePostInput,
   ): Promise<PostsModel> {
-    return this.postsService.update(updatePostInput.id, updatePostInput);
+    return this.postsService.update(updatePostInput._id, updatePostInput);
   }
 
   @Mutation(() => PostsModel)
   async deletePost(
-    @Args('id', { type: () => String }) id: string,
+    @Args('_id', { type: () => String }) _id: string,
   ): Promise<PostsModel> {
-    return this.postsService.delete(id);
+    return this.postsService.delete(_id);
   }
 }

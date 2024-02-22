@@ -1,9 +1,16 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
+import { Schema as MongooseSchema } from 'mongoose';
+
+@InputType()
+export class FindCategoryInput {
+  @Field(() => String)
+  _id: MongooseSchema.Types.ObjectId;
+}
 
 @InputType()
 export class UpdateCategoryInput {
-  @Field(() => ID)
-  id: string;
+  @Field(() => String)
+  _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
   name?: string;

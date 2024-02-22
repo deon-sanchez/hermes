@@ -3,6 +3,7 @@ import { CategoriesService } from './categories.service';
 import { CategoriesModel } from 'src/models/categories.model';
 import {
   CreateCategoryInput,
+  FindCategoryInput,
   UpdateCategoryInput,
 } from 'src/dtos/categories.input';
 
@@ -17,9 +18,9 @@ export class CategoriesResolver {
 
   @Query(() => CategoriesModel)
   async category(
-    @Args('id', { type: () => String }) id: string,
+    @Args('findCategoryInput') findCategoryInput: FindCategoryInput,
   ): Promise<CategoriesModel> {
-    return this.categoriesService.findOne(id);
+    return this.categoriesService.findOne(findCategoryInput);
   }
 
   @Mutation(() => CategoriesModel)
@@ -34,15 +35,15 @@ export class CategoriesResolver {
     @Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput,
   ): Promise<CategoriesModel> {
     return this.categoriesService.update(
-      updateCategoryInput.id,
+      updateCategoryInput._id,
       updateCategoryInput,
     );
   }
 
   @Mutation(() => CategoriesModel)
   async deleteCategory(
-    @Args('id', { type: () => String }) id: string,
+    @Args('_id', { type: () => String }) _id: string,
   ): Promise<CategoriesModel> {
-    return this.categoriesService.delete(id);
+    return this.categoriesService.delete(_id);
   }
 }

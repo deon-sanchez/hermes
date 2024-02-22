@@ -1,18 +1,19 @@
 import { InputType, Field, ID } from '@nestjs/graphql';
+import { Schema as MongooseSchema } from 'mongoose';
 
 @InputType()
 export class UpdateCommentInput {
-  @Field(() => ID)
-  id: string;
+  @Field(() => String)
+  id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
   content?: string;
 
   @Field(() => String, { nullable: true })
-  userId?: string;
+  userId?: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })
-  postId?: string;
+  postId?: MongooseSchema.Types.ObjectId;
 }
 
 @InputType()
@@ -21,8 +22,8 @@ export class CreateCommentInput {
   content: string;
 
   @Field(() => String)
-  userId: string;
+  userId: MongooseSchema.Types.ObjectId;
 
   @Field(() => String)
-  postId: string;
+  postId: MongooseSchema.Types.ObjectId;
 }

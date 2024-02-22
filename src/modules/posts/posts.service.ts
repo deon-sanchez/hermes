@@ -4,7 +4,6 @@ import { Model, Schema as MongooseSchema } from 'mongoose';
 import { PostsDocument, PostsModel } from 'src/models/posts.model';
 import {
   CreatePostInput,
-  FindPostInput,
   FindPostsInput,
   UpdatePostInput,
 } from 'src/dtos/posts.input';
@@ -30,15 +29,20 @@ export class PostsService {
         .find({ categoryId: findPostsInput.categoryId })
         .exec();
     }
+
     return this.postModel.find().exec();
   }
 
-  async findOne(findPostInput: FindPostInput): Promise<PostsModel> {
-    if (findPostInput?.id) {
-      return await this.postModel.findById(findPostInput.id).exec();
-    } else if (findPostInput?.userId) {
+  async findOne(findPostsInput: FindPostsInput): Promise<PostsModel> {
+    if (findPostsInput?._id) {
+      return await this.postModel.findById(findPostsInput._id).exec();
+    } else if (findPostsInput?.userId) {
       return await this.postModel
-        .findOne({ userId: findPostInput.userId })
+        .findOne({ userId: findPostsInput.userId })
+        .exec();
+    } else if (findPostsInput?.categoryId) {
+      return await this.postModel
+        .findOne({ categoryId: findPostsInput.categoryId })
         .exec();
     }
   }
