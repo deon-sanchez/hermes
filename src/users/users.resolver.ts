@@ -7,12 +7,12 @@ import { CreateUserInput } from './dto/users.input';
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @Query(() => [UsersModel], { name: 'getAllUsers' })
+  @Query(() => [UsersModel], { name: 'users' })
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Query(() => UsersModel, { name: 'getUser' })
+  @Query(() => UsersModel, { name: 'user' })
   findOne(@Args('id', { type: () => String }) id: string) {
     return this.usersService.findOne(id);
   }

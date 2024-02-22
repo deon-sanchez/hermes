@@ -79,10 +79,10 @@ type Query {
   category(id: String!): CategoriesModel!
   comment(id: String!): CommentsModel!
   comments: [CommentsModel!]!
-  getAllUsers: [UsersModel!]!
-  getUser(id: String!): UsersModel!
   post(id: String!): PostsModel!
   posts: [PostsModel!]!
+  user(id: String!): UsersModel!
+  users: [UsersModel!]!
 }
 
 input UpdateCategoryInput {
