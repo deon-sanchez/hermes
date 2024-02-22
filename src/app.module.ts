@@ -51,5 +51,6 @@ import { CommentsModule } from 'src/modules/comments/comments.module';
     CategoriesModule,
   ],
   controllers: [],
+  providers: [],
 })
 export class AppModule {}

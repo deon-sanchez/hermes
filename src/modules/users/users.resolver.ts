@@ -4,6 +4,7 @@ import {
   Parent,
   Query,
   ResolveField,
+  ResolveProperty,
   Resolver,
 } from '@nestjs/graphql';
 import { UsersDocument, UsersModel } from 'src/models/users.model';
@@ -19,24 +20,24 @@ export class UsersResolver {
     private readonly postsServices: PostsService,
   ) {}
 
-  @Query((_returns) => [UsersModel], { name: 'users' })
+  @Query(() => [UsersModel], { name: 'users' })
   getUsers(): Promise<UsersModel[]> {
     return this.usersService.findAll();
   }
 
-  @Query((_returns) => UsersModel, { name: 'user' })
+  @Query(() => UsersModel, { name: 'user' })
   getUser(
     @Args('findUserInput') findUserInput: FindUserInput,
   ): Promise<UsersModel> {
     return this.usersService.findOne(findUserInput);
   }
 
-  @Mutation((_returns) => UsersModel, { name: 'createUser' })
+  @Mutation(() => UsersModel, { name: 'createUser' })
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.usersService.create(createUserInput);
   }
 
-  @ResolveField('posts', (_returns) => [PostsModel])
+  @ResolveProperty('posts', () => [PostsModel])
   async getPosts(@Parent() user: UsersDocument) {
     const { _id } = user;
     return this.postsServices.findAll({ userId: _id });

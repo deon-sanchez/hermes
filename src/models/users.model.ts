@@ -1,20 +1,20 @@
 import { Field, HideField, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { PostsModel } from './posts.model';
 import { TimestampModel } from './timestamp.model';
+import { PostsModel } from './posts.model';
 
 @ObjectType({ description: 'Users Response' })
 @Schema({ timestamps: true })
 export class UsersModel extends TimestampModel {
-  @Field((type) => String)
+  @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
 
-  @Field((type) => String)
+  @Field(() => String)
   @Prop({ type: String, required: true })
   name: string;
 
-  @Field((type) => String)
+  @Field(() => String)
   @Prop({ type: String, required: true, unique: true })
   email: string;
 
@@ -22,11 +22,9 @@ export class UsersModel extends TimestampModel {
   @Prop({ type: String, required: true })
   password: string;
 
-  @Field((type) => [PostsModel], { nullable: true })
-  @Prop({
-    type: [{ type: MongooseSchema.Types.ObjectId, ref: PostsModel.name }],
-  })
-  posts: PostsModel[];
+  @Field(() => [PostsModel])
+  @Prop({ type: [MongooseSchema.Types.ObjectId], ref: PostsModel.name })
+  posts: MongooseSchema.Types.ObjectId[] | PostsModel[];
 }
 
 export const UsersSchema = SchemaFactory.createForClass(UsersModel);
