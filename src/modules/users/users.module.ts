@@ -9,8 +9,8 @@ import { PostsModel, PostsSchema } from 'src/models/posts.model';
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { schema: UsersSchema, name: UsersModel.name },
-      { schema: PostsSchema, name: PostsModel.name },
+      { schema: UsersSchema, name: UsersModel.name, collection: 'users' },
+      { schema: PostsSchema, name: PostsModel.name, collection: 'posts' },
     ]),
   ],
   providers: [UsersService, PostsService, UsersResolver],

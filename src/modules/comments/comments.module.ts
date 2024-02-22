@@ -7,7 +7,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { schema: CommentsSchema, name: CommentsModel.name },
+      {
+        schema: CommentsSchema,
+        name: CommentsModel.name,
+        collection: 'comments',
+      },
     ]),
   ],
   providers: [CommentsService, CommentsResolver],

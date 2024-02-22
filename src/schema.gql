@@ -32,14 +32,6 @@ input CreateCommentInput {
   userId: String!
 }
 
-"""Create a post"""
-input CreatePostInput {
-  categoryId: String!
-  content: String!
-  title: String!
-  userId: String!
-}
-
 input CreateUserInput {
   email: String!
   name: String!
@@ -61,13 +53,6 @@ input FindCommentsInput {
   userId: String
 }
 
-"""Find posts"""
-input FindPostsInput {
-  _id: String
-  categoryId: String
-  userId: String
-}
-
 input FindUserInput {
   _id: String
   email: String
@@ -76,14 +61,11 @@ input FindUserInput {
 type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): CategoriesModel!
   createComment(createCommentInput: CreateCommentInput!): CommentsModel!
-  createPost(createPostInput: CreatePostInput!): PostsModel!
   createUser(createUserInput: CreateUserInput!): UsersModel!
   deleteCategory(_id: String!): CategoriesModel!
   deleteComment(id: String!): CommentsModel!
-  deletePost(_id: String!): PostsModel!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): CategoriesModel!
   updateComment(updateCommentInput: UpdateCommentInput!): CommentsModel!
-  updatePost(updatePostInput: UpdatePostInput!): PostsModel!
 }
 
 """Posts Response"""
@@ -102,8 +84,6 @@ type Query {
   category(findCategoryInput: FindCategoryInput!): CategoriesModel!
   comment(findCommentsInput: FindCommentsInput!): CommentsModel!
   comments(findCommentsInput: FindCommentsInput): [CommentsModel!]!
-  post(findPostsInput: FindPostsInput!): PostsModel!
-  posts(findPostsInput: FindPostsInput): [PostsModel!]!
   user(findUserInput: FindUserInput!): UsersModel!
   users: [UsersModel!]!
 }
@@ -121,19 +101,12 @@ input UpdateCommentInput {
   userId: String
 }
 
-input UpdatePostInput {
-  _id: String!
-  categoryId: String
-  content: String
-  title: String
-  userId: String
-}
-
 """Users Response"""
 type UsersModel {
   _id: String!
   createdAt: DateTime!
   email: String!
   name: String!
+  posts: [PostsModel!]!
   updatedAt: DateTime!
 }

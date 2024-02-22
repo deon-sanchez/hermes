@@ -1,10 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
+import { TimestampModel } from './timestamp.model';
 
 @ObjectType({ description: 'Comments Response' })
 @Schema({ timestamps: true })
-export class CommentsModel {
+export class CommentsModel extends TimestampModel {
   @Field((type) => String)
   _id: MongooseSchema.Types.ObjectId;
 
@@ -19,12 +20,6 @@ export class CommentsModel {
   @Field((type) => String)
   @Prop({ type: String, required: true })
   postId: MongooseSchema.Types.ObjectId;
-
-  @Field((type) => Date)
-  createdAt: Date;
-
-  @Field((type) => Date)
-  updatedAt: Date;
 }
 
 export const CommentsSchema = SchemaFactory.createForClass(CommentsModel);

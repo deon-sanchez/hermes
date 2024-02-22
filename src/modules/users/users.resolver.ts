@@ -19,27 +19,26 @@ export class UsersResolver {
     private readonly postsServices: PostsService,
   ) {}
 
-  @Query((returns) => [UsersModel])
-  users(): Promise<UsersModel[]> {
+  @Query((_returns) => [UsersModel], { name: 'users' })
+  getUsers(): Promise<UsersModel[]> {
     return this.usersService.findAll();
   }
 
-  @Query((returns) => UsersModel)
-  user(
+  @Query((_returns) => UsersModel, { name: 'user' })
+  getUser(
     @Args('findUserInput') findUserInput: FindUserInput,
   ): Promise<UsersModel> {
     return this.usersService.findOne(findUserInput);
   }
 
-  @Mutation((returns) => UsersModel)
+  @Mutation((_returns) => UsersModel, { name: 'createUser' })
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.usersService.create(createUserInput);
   }
 
-  // @ResolveField(() => [PostsModel])
-  // async posts(@Parent() user: UsersDocument) {
-  //   const u = await user.populate({ path: 'posts', model: PostsModel.name });
-  //   const x = await this.postsServices.findAll({ userId: user._id });
-  //   return x;
-  // }
+  @ResolveField('posts', (_returns) => [PostsModel])
+  async getPosts(@Parent() user: UsersDocument) {
+    const { _id } = user;
+    return this.postsServices.findAll({ userId: _id });
+  }
 }

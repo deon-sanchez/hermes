@@ -1,10 +1,11 @@
-import { Field, ID, ObjectType, HideField } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
+import { TimestampModel } from './timestamp.model';
 
 @ObjectType({ description: 'Posts Response' })
 @Schema({ timestamps: true })
-export class PostsModel extends Document {
+export class PostsModel extends TimestampModel {
   @Field((type) => String)
   _id: MongooseSchema.Types.ObjectId;
 
@@ -23,12 +24,6 @@ export class PostsModel extends Document {
   @Field((type) => String)
   @Prop({ type: MongooseSchema.Types.ObjectId, required: true })
   categoryId: MongooseSchema.Types.ObjectId;
-
-  @Field((type) => Date)
-  createdAt: Date; // No need for @Prop decorator, handled by timestamps option
-
-  @Field((type) => Date)
-  updatedAt: Date;
 }
 
 export const PostsSchema = SchemaFactory.createForClass(PostsModel);
