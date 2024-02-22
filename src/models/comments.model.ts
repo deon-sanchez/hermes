@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType, HideField } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 
@@ -14,9 +14,10 @@ export class CommentsModel {
 
   @Field((type) => String)
   @Prop({ type: String, required: true })
-  userId: string;
+  userId: MongooseSchema.Types.ObjectId;
 
   @Field((type) => String)
+  @Prop({ type: String, required: true })
   postId: MongooseSchema.Types.ObjectId;
 
   @Field((type) => Date)

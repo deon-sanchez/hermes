@@ -3,6 +3,7 @@ import { CommentsService } from './comments.service';
 import { CommentsModel } from 'src/models/comments.model';
 import {
   CreateCommentInput,
+  FindCommentsInput,
   UpdateCommentInput,
 } from 'src/dtos/comments.input';
 
@@ -11,15 +12,18 @@ export class CommentsResolver {
   constructor(private readonly commentsService: CommentsService) {}
 
   @Query(() => [CommentsModel])
-  async comments(): Promise<CommentsModel[]> {
-    return this.commentsService.findAll();
+  async comments(
+    @Args('findCommentsInput', { nullable: true })
+    findCommentsInput: FindCommentsInput,
+  ): Promise<CommentsModel[]> {
+    return this.commentsService.findAll(findCommentsInput);
   }
 
   @Query(() => CommentsModel)
   async comment(
-    @Args('id', { type: () => String }) id: string,
+    @Args('findCommentsInput') findCommentsInput: FindCommentsInput,
   ): Promise<CommentsModel> {
-    return this.commentsService.findOne(id);
+    return this.commentsService.findOne(findCommentsInput);
   }
 
   @Mutation(() => CommentsModel)
@@ -34,7 +38,7 @@ export class CommentsResolver {
     @Args('updateCommentInput') updateCommentInput: UpdateCommentInput,
   ): Promise<CommentsModel> {
     return this.commentsService.update(
-      updateCommentInput.id,
+      updateCommentInput._id,
       updateCommentInput,
     );
   }

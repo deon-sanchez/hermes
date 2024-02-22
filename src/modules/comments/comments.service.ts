@@ -4,6 +4,7 @@ import { Model, Schema as MongooseSchema } from 'mongoose';
 import { CommentsDocument, CommentsModel } from 'src/models/comments.model';
 import {
   CreateCommentInput,
+  FindCommentsInput,
   UpdateCommentInput,
 } from 'src/dtos/comments.input';
 
@@ -19,12 +20,32 @@ export class CommentsService {
     return createdComment.save();
   }
 
-  async findAll(): Promise<CommentsModel[]> {
+  async findAll(findCommentInput: FindCommentsInput): Promise<CommentsModel[]> {
+    if (findCommentInput?.userId) {
+      return await this.commentModel
+        .find({ userId: findCommentInput.userId })
+        .exec();
+    } else if (findCommentInput?.postId) {
+      return await this.commentModel
+        .find({ postId: findCommentInput.postId })
+        .exec();
+    }
+
     return this.commentModel.find().exec();
   }
 
-  async findOne(id: string): Promise<CommentsModel> {
-    return this.commentModel.findById(id).exec();
+  async findOne(findCommentInput: FindCommentsInput): Promise<CommentsModel> {
+    if (findCommentInput?._id) {
+      return await this.commentModel.findById(findCommentInput._id).exec();
+    } else if (findCommentInput?.userId) {
+      return await this.commentModel
+        .findOne({ userId: findCommentInput.userId })
+        .exec();
+    } else if (findCommentInput?.postId) {
+      return await this.commentModel
+        .findOne({ postId: findCommentInput.postId })
+        .exec();
+    }
   }
 
   async update(
