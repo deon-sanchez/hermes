@@ -2,12 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""Blog Response"""
-type BlogModel {
+"""Post Response"""
+type PostModel {
   _id: String!
   user: String!
 }
 
 type Query {
-  blog: [BlogModel!]!
+  post: [PostModel!]!
 }

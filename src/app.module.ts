@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { BlogModule } from './blog/blog.module';
+import { PostModule } from './post/post.module';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
@@ -41,7 +41,7 @@ import { MongooseModule } from '@nestjs/mongoose';
       }),
       inject: [ConfigService],
     }),
-    BlogModule,
+    PostModule,
   ],
   controllers: [],
   providers: [],
