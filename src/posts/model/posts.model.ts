@@ -8,11 +8,32 @@ export type PostsDocument = PostsModel & Document;
 @Schema()
 export class PostsModel extends Document {
   @Field((type) => String)
+  @Prop({ type: String })
   _id: string;
 
   @Field((type) => String)
   @Prop({ type: String })
-  user: string;
+  title: string;
+
+  @Field((type) => String)
+  @Prop({ type: String })
+  content: string;
+
+  @Field((type) => String)
+  @Prop({ type: String })
+  userId: string;
+
+  @Field((type) => String)
+  @Prop({ type: String })
+  categoryId: string;
+
+  @Field((type) => String)
+  @Prop({ type: String })
+  createdAt: string;
+
+  @Field((type) => String)
+  @Prop({ type: String })
+  updatedAt: string;
 }
 
 export const PostsSchema = SchemaFactory.createForClass(PostsModel);
