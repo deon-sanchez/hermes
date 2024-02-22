@@ -1,23 +1,14 @@
-import {
-  Args,
-  Mutation,
-  Parent,
-  Query,
-  ResolveField,
-  ResolveProperty,
-  Resolver,
-} from '@nestjs/graphql';
-import { UsersDocument, UsersModel } from 'src/models/users.model';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { UsersModel } from 'src/models/users.model';
 import { CreateUserInput, FindUserInput } from 'src/dtos/users.input';
 import { PostsService } from '../posts/posts.service';
 import { UsersService } from './users.service';
-import { PostsModel } from 'src/models/posts.model';
 
 @Resolver((of) => UsersModel)
 export class UsersResolver {
   constructor(
     private readonly usersService: UsersService,
-    private readonly postsServices: PostsService,
+    // private readonly postsServices: PostsService,
   ) {}
 
   @Query(() => [UsersModel], { name: 'users' })
@@ -37,9 +28,9 @@ export class UsersResolver {
     return this.usersService.create(createUserInput);
   }
 
-  @ResolveProperty('posts', () => [PostsModel])
-  async getPosts(@Parent() user: UsersDocument) {
-    const { _id } = user;
-    return this.postsServices.findAll({ userId: _id });
-  }
+  // @ResolveProperty('posts', () => [PostsModel])
+  // async getPosts(@Parent() user: UsersDocument) {
+  //   const { _id } = user;
+  //   return this.postsServices.findAll({ userId: _id });
+  // }
 }

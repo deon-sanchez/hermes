@@ -135,6 +135,5 @@ type UsersModel {
   createdAt: DateTime!
   email: String!
   name: String!
-  posts: [UsersModel!]!
   updatedAt: DateTime!
 }
