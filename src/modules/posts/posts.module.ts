@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { PostsResolver } from './posts.resolver';
 import { PostsService } from './posts.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PostsModel, PostsSchema } from './model/posts.model';
+import { PostsModel, PostsSchema } from 'src/models/posts.model';
 
 @Module({
   imports: [

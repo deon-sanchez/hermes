@@ -1,8 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { PostsDocument, PostsModel } from './model/posts.model';
-import { CreatePostInput, UpdatePostInput } from './dto/posts.input';
+import { PostsDocument, PostsModel } from 'src/models/posts.model';
+import {
+  CreatePostInput,
+  FindPostInput,
+  FindPostsInput,
+  UpdatePostInput,
+} from 'src/dtos/posts.input';
 
 @Injectable()
 export class PostsService {
@@ -15,12 +20,23 @@ export class PostsService {
     return createdPost.save();
   }
 
-  async findAll(): Promise<PostsModel[]> {
+  async findAll(findPostsInput: FindPostsInput): Promise<PostsModel[]> {
+    if (findPostsInput?.userId) {
+      return this.postModel.find({ userId: findPostsInput.userId }).exec();
+    } else if (findPostsInput?.categoryId) {
+      return this.postModel
+        .find({ categoryId: findPostsInput.categoryId })
+        .exec();
+    }
     return this.postModel.find().exec();
   }
 
-  async findOne(id: string): Promise<PostsModel> {
-    return this.postModel.findById(id).exec();
+  async findOne(findPostInput: FindPostInput): Promise<PostsModel> {
+    if (findPostInput?.id) {
+      return this.postModel.findById(findPostInput.id).exec();
+    } else if (findPostInput?.userId) {
+      return this.postModel.findOne({ userId: findPostInput.userId }).exec();
+    }
   }
 
   async update(

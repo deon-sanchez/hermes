@@ -1,8 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UsersDocument, UsersModel } from './model/users.model';
-import { CreateUserInput } from './dto/users.input';
+import { UsersDocument, UsersModel } from 'src/models/users.model';
+import { CreateUserInput } from 'src/dtos/users.input';
 
 @Injectable()
 export class UsersService {
@@ -16,10 +20,21 @@ export class UsersService {
   }
 
   async findAll(): Promise<UsersModel[]> {
-    return this.usersModel.find().exec();
+    const users = await this.usersModel.find().lean().exec();
+
+    if (!users) {
+      throw new InternalServerErrorException();
+    }
+    return users;
   }
 
   async findOne(id: string): Promise<UsersModel> {
-    return this.usersModel.findById(id).exec();
+    const user = await this.usersModel.findById(id).lean().exec();
+
+    if (!user) {
+      throw new NotFoundException(`User not found`);
+    }
+
+    return user;
   }
 }

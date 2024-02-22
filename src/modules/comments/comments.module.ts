@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CommentsResolver } from './comments.resolver';
-import { CommentsModel, CommentsSchema } from './model/comments.model';
+import { CommentsModel, CommentsSchema } from 'src/models/comments.model';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({

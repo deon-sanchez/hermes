@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CommentsDocument, CommentsModel } from './model/comments.model';
-import { CreateCommentInput, UpdateCommentInput } from './dto/comments.input';
+import { CommentsDocument, CommentsModel } from 'src/models/comments.model';
+import {
+  CreateCommentInput,
+  UpdateCommentInput,
+} from 'src/dtos/comments.input';
 
 @Injectable()
 export class CommentsService {

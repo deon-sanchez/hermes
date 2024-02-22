@@ -1,22 +1,30 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PostsService } from './posts.service';
-import { PostsModel } from './model/Posts.model';
-import { CreatePostInput, UpdatePostInput } from './dto/posts.input';
+import { PostsModel } from 'src/models/Posts.model';
+import {
+  CreatePostInput,
+  FindPostInput,
+  FindPostsInput,
+  UpdatePostInput,
+} from 'src/dtos/posts.input';
 
 @Resolver(() => PostsModel)
 export class PostsResolver {
   constructor(private readonly postsService: PostsService) {}
 
-  @Query(() => [PostsModel])
-  async posts(): Promise<PostsModel[]> {
-    return this.postsService.findAll();
-  }
-
   @Query(() => PostsModel)
   async post(
-    @Args('id', { type: () => String }) id: string,
+    @Args('findPostInput')
+    findPostInput: FindPostInput,
   ): Promise<PostsModel> {
-    return this.postsService.findOne(id);
+    return this.postsService.findOne(findPostInput);
+  }
+
+  @Query(() => [PostsModel])
+  async posts(
+    @Args('FindPostsInput', { nullable: true }) findPostsInput?: FindPostsInput,
+  ): Promise<PostsModel[]> {
+    return this.postsService.findAll(findPostsInput);
   }
 
   @Mutation(() => PostsModel)

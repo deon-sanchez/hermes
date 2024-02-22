@@ -1,19 +1,30 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+import { UsersDocument, UsersModel } from 'src/models/users.model';
+import { CreateUserInput } from 'src/dtos/users.input';
+import { PostsService } from '../posts/posts.service';
 import { UsersService } from './users.service';
-import { UsersModel } from './model/users.model';
-import { CreateUserInput } from './dto/users.input';
 
-@Resolver(() => UsersModel)
+@Resolver((of) => UsersModel)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly postsServices: PostsService,
+  ) {}
 
-  @Query(() => [UsersModel], { name: 'users' })
-  findAll() {
+  @Query((returns) => [UsersModel])
+  users(): Promise<UsersModel[]> {
     return this.usersService.findAll();
   }
 
-  @Query(() => UsersModel, { name: 'user' })
-  findOne(@Args('id', { type: () => String }) id: string) {
+  @Query((returns) => UsersModel)
+  user(@Args('id') id: string): Promise<UsersModel> {
     return this.usersService.findOne(id);
   }
 
@@ -21,4 +32,9 @@ export class UsersResolver {
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
     return this.usersService.create(createUserInput);
   }
+
+  // @ResolveField()
+  // async posts(@Parent() user: UsersDocument) {
+  //   return await this.postsServices.findByUserId(user._id);
+  // }
 }
