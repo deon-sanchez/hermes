@@ -1,13 +1,14 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
+
 import { Comments } from './comments.model';
 import { Categories } from './categories.model';
 import { Users } from './users.model';
 
-@ObjectType({ description: 'Blogs Response' })
+@ObjectType({ description: 'Posts Response' })
 @Schema({ timestamps: true })
-export class Blogs {
+export class Posts {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
 
@@ -38,5 +39,5 @@ export class Blogs {
   categories: Categories[];
 }
 
-export const BlogsSchema = SchemaFactory.createForClass(Blogs);
-export type BlogsDocument = Blogs & Document;
+export const PostsSchema = SchemaFactory.createForClass(Posts);
+export type PostsDocument = Posts & Document;

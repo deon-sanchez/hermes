@@ -5,7 +5,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
 import { join } from 'path';
 
-import { BlogsModule } from 'src/modules/blogs/blogs.module';
+import { PostsModule } from 'src/modules/posts/posts.module';
 import { UsersModule } from 'src/modules/users/users.module';
 import { CategoriesModule } from 'src/modules/categories/categories.module';
 import { CommentsModule } from 'src/modules/comments/comments.module';
@@ -38,7 +38,7 @@ import { CommentsModule } from 'src/modules/comments/comments.module';
     }),
 
     // Importing the modules
-    BlogsModule,
+    PostsModule,
     CategoriesModule,
     CommentsModule,
     UsersModule,
