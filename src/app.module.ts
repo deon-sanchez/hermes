@@ -39,9 +39,9 @@ import { CommentsModule } from 'src/modules/comments/comments.module';
 
     // Importing the modules
     BlogsModule,
+    CategoriesModule,
     CommentsModule,
     UsersModule,
-    CategoriesModule,
   ],
   controllers: [],
   providers: [],
