@@ -70,8 +70,24 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "**/*.(t|j)s",
+      "!main.(t|j)s",
+      "!**/*.module.(t|j)s",
+      "!**/*.input.(t|j)s",
+      "!**/*.entity.(t|j)s",
+      "!**/*.guards.(t|j)s",
+      "!**/*.response.(t|j)s",
+      "!**/*.strategy.(t|j)s",
+      "!**/*.args.(t|j)s",
+      "!**/*.helper.(t|j)s",
+      "!**/*.types.(t|j)s",
+      "!**/*.entities.(t|j)s",
+      "!**/*.helpers.(t|j)s",
+      "!**/node_modules/**"
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"

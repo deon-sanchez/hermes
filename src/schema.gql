@@ -2,48 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""Categories Response"""
-type CategoriesModel {
+"""Users Response"""
+type Users {
   _id: String!
-  createdAt: DateTime!
-  description: String!
   name: String!
-  updatedAt: DateTime!
-}
-
-"""Comments Response"""
-type CommentsModel {
-  _id: String!
-  content: String!
-  createdAt: DateTime!
-  postId: String!
-  updatedAt: DateTime!
-  userId: String!
-}
-
-input CreateCategoryInput {
-  description: String!
-  name: String!
-}
-
-input CreateCommentInput {
-  content: String!
-  postId: String!
-  userId: String!
-}
-
-"""Create a post"""
-input CreatePostInput {
-  categoryId: String!
-  content: String!
-  title: String!
-  userId: String!
-}
-
-input CreateUserInput {
   email: String!
-  name: String!
-  password: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """
@@ -51,89 +16,109 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-input FindCategoryInput {
+"""Blogs Response"""
+type Blogs {
+  _id: String!
+  title: String!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  users: [Users!]!
+}
+
+"""Categories Response"""
+type Categories {
+  _id: String!
+  name: String!
+  description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""Comments Response"""
+type Comments {
+  _id: String!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  getBlogs: [Blogs!]!
+  getBlogs(findBlogsInput: FindBlogsInput!): Blogs!
+  getComments: [Comments!]!
+  getComment(findCommentsInput: FindCommentsInput!): Comments!
+  getUsers: [Users!]!
+  getUser(findUserInput: FindUserInput!): Users!
+  getCategories: [Categories!]!
+  getCategory(findCategoryInput: FindCategoryInput!): Categories!
+}
+
+"""Find blogs"""
+input FindBlogsInput {
   _id: String!
 }
 
 input FindCommentsInput {
-  _id: String
-  postId: String
-  userId: String
-}
-
-"""Find posts"""
-input FindPostsInput {
-  _id: String
-  categoryId: String
-  userId: String
+  _id: String!
 }
 
 input FindUserInput {
-  _id: String
+  _id: String!
   email: String
 }
 
+input FindCategoryInput {
+  _id: String!
+}
+
 type Mutation {
-  createCategory(createCategoryInput: CreateCategoryInput!): CategoriesModel!
-  createComment(createCommentInput: CreateCommentInput!): CommentsModel!
-  createPost(createPostInput: CreatePostInput!): PostsModel!
-  createUser(createUserInput: CreateUserInput!): UsersModel!
-  deleteCategory(_id: String!): CategoriesModel!
-  deleteComment(id: String!): CommentsModel!
-  deletePost(_id: String!): PostsModel!
-  updateCategory(updateCategoryInput: UpdateCategoryInput!): CategoriesModel!
-  updateComment(updateCommentInput: UpdateCommentInput!): CommentsModel!
-  updatePost(updatePostInput: UpdatePostInput!): PostsModel!
+  createBlogs(createBlogsInput: CreateBlogsInput!): Blogs!
+  updateBlogs(updateBlogsInput: UpdateBlogsInput!): Blogs!
+  deleteBlogs(_id: String!): Blogs!
+  createComment(createCommentInput: CreateCommentInput!): Comments!
+  updateComment(updateCommentInput: UpdateCommentInput!): Comments!
+  deleteComment(_id: String!): Comments!
+  createUser(createUserInput: CreateUserInput!): Users!
+  createCategory(createCategoryInput: CreateCategoryInput!): Categories!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Categories!
+  deleteCategory(_id: String!): Categories!
 }
 
-"""Posts Response"""
-type PostsModel {
-  _id: String!
-  categoryId: String!
-  content: String!
-  createdAt: DateTime!
+"""Create a Blogs"""
+input CreateBlogsInput {
   title: String!
-  updatedAt: DateTime!
-  userId: String!
+  content: String!
 }
 
-type Query {
-  categories: [CategoriesModel!]!
-  category(findCategoryInput: FindCategoryInput!): CategoriesModel!
-  comment(findCommentsInput: FindCommentsInput!): CommentsModel!
-  comments(findCommentsInput: FindCommentsInput): [CommentsModel!]!
-  post(findPostsInput: FindPostsInput!): PostsModel!
-  posts(findPostsInput: FindPostsInput): [PostsModel!]!
-  user(findUserInput: FindUserInput!): UsersModel!
-  users: [UsersModel!]!
-}
-
-input UpdateCategoryInput {
+input UpdateBlogsInput {
   _id: String!
-  description: String
-  name: String
+  title: String
+  content: String
+}
+
+input CreateCommentInput {
+  content: String!
 }
 
 input UpdateCommentInput {
   _id: String!
   content: String
-  postId: String
-  userId: String
 }
 
-input UpdatePostInput {
-  _id: String!
-  categoryId: String
-  content: String
-  title: String
-  userId: String
-}
-
-"""Users Response"""
-type UsersModel {
-  _id: String!
-  createdAt: DateTime!
-  email: String!
+input CreateUserInput {
   name: String!
-  updatedAt: DateTime!
+  email: String!
+  password: String!
+}
+
+input CreateCategoryInput {
+  name: String!
+  description: String!
+}
+
+input UpdateCategoryInput {
+  _id: String!
+  name: String
+  description: String
 }

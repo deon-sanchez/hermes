@@ -1,52 +1,50 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CommentsService } from './comments.service';
-import { CommentsModel } from 'src/models/comments.model';
+import { Comments } from 'src/models/comments.model';
+import { Schema as MongooseSchema } from 'mongoose';
 import {
   CreateCommentInput,
   FindCommentsInput,
   UpdateCommentInput,
 } from 'src/dtos/comments.input';
 
-@Resolver(() => CommentsModel)
+@Resolver(() => Comments)
 export class CommentsResolver {
   constructor(private readonly commentsService: CommentsService) {}
 
-  @Query(() => [CommentsModel])
-  async comments(
-    @Args('findCommentsInput', { nullable: true })
-    findCommentsInput: FindCommentsInput,
-  ): Promise<CommentsModel[]> {
-    return this.commentsService.findAll(findCommentsInput);
+  @Query(() => [Comments])
+  async getComments(): Promise<Comments[]> {
+    return this.commentsService.findAll();
   }
 
-  @Query(() => CommentsModel)
-  async comment(
+  @Query(() => Comments)
+  async getComment(
     @Args('findCommentsInput') findCommentsInput: FindCommentsInput,
-  ): Promise<CommentsModel> {
+  ): Promise<Comments> {
     return this.commentsService.findOne(findCommentsInput);
   }
 
-  @Mutation(() => CommentsModel)
+  @Mutation(() => Comments)
   async createComment(
     @Args('createCommentInput') createCommentInput: CreateCommentInput,
-  ): Promise<CommentsModel> {
+  ): Promise<Comments> {
     return this.commentsService.create(createCommentInput);
   }
 
-  @Mutation(() => CommentsModel)
+  @Mutation(() => Comments)
   async updateComment(
     @Args('updateCommentInput') updateCommentInput: UpdateCommentInput,
-  ): Promise<CommentsModel> {
+  ): Promise<Comments> {
     return this.commentsService.update(
       updateCommentInput._id,
       updateCommentInput,
     );
   }
 
-  @Mutation(() => CommentsModel)
+  @Mutation(() => Comments)
   async deleteComment(
-    @Args('id', { type: () => String }) id: string,
-  ): Promise<CommentsModel> {
-    return this.commentsService.delete(id);
+    @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
+  ): Promise<Comments> {
+    return this.commentsService.delete(_id);
   }
 }

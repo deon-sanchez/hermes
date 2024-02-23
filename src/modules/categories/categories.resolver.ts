@@ -1,49 +1,50 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CategoriesService } from './categories.service';
-import { CategoriesModel } from 'src/models/categories.model';
+import { Categories } from 'src/models/categories.model';
+import { Schema as MongooseSchema } from 'mongoose';
 import {
   CreateCategoryInput,
   FindCategoryInput,
   UpdateCategoryInput,
 } from 'src/dtos/categories.input';
 
-@Resolver(() => CategoriesModel)
+@Resolver(() => Categories)
 export class CategoriesResolver {
   constructor(private readonly categoriesService: CategoriesService) {}
 
-  @Query(() => [CategoriesModel])
-  async categories(): Promise<CategoriesModel[]> {
+  @Query(() => [Categories])
+  async getCategories(): Promise<Categories[]> {
     return this.categoriesService.findAll();
   }
 
-  @Query(() => CategoriesModel)
-  async category(
+  @Query(() => Categories)
+  async getCategory(
     @Args('findCategoryInput') findCategoryInput: FindCategoryInput,
-  ): Promise<CategoriesModel> {
+  ): Promise<Categories> {
     return this.categoriesService.findOne(findCategoryInput);
   }
 
-  @Mutation(() => CategoriesModel)
+  @Mutation(() => Categories)
   async createCategory(
     @Args('createCategoryInput') createCategoryInput: CreateCategoryInput,
-  ): Promise<CategoriesModel> {
+  ): Promise<Categories> {
     return this.categoriesService.create(createCategoryInput);
   }
 
-  @Mutation(() => CategoriesModel)
+  @Mutation(() => Categories)
   async updateCategory(
     @Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput,
-  ): Promise<CategoriesModel> {
+  ): Promise<Categories> {
     return this.categoriesService.update(
       updateCategoryInput._id,
       updateCategoryInput,
     );
   }
 
-  @Mutation(() => CategoriesModel)
+  @Mutation(() => Categories)
   async deleteCategory(
-    @Args('_id', { type: () => String }) _id: string,
-  ): Promise<CategoriesModel> {
+    @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
+  ): Promise<Categories> {
     return this.categoriesService.delete(_id);
   }
 }

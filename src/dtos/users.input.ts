@@ -1,9 +1,11 @@
 import { Field, InputType } from '@nestjs/graphql';
+import { IsMongoId } from 'class-validator';
 import { Schema as MongooseSchema } from 'mongoose';
 
 @InputType()
 export class FindUserInput {
-  @Field(() => String, { nullable: true })
+  @Field(() => String)
+  @IsMongoId()
   _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })

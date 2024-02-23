@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CommentsService } from './comments.service';
 import { CommentsResolver } from './comments.resolver';
-import { CommentsModel, CommentsSchema } from 'src/models/comments.model';
+import { Comments, CommentsSchema } from 'src/models/comments.model';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
@@ -9,8 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     MongooseModule.forFeature([
       {
         schema: CommentsSchema,
-        name: CommentsModel.name,
-        collection: 'comments',
+        name: Comments.name,
       },
     ]),
   ],
