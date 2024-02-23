@@ -2,12 +2,12 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 
 import { CategoriesService } from './categories.service';
-import { Categories } from 'src/models/categories.model';
+import { Categories } from 'src/categories/categories.model';
 import {
   CreateCategoryInput,
   FindCategoryInput,
   UpdateCategoryInput,
-} from 'src/dtos/categories.input';
+} from 'src/categories/categories.input';
 
 @Resolver(() => Categories)
 export class CategoriesResolver {

@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
 
-import { PostsDocument, Posts } from 'src/models/posts.model';
+import { PostsDocument, Posts } from 'src/posts/posts.model';
 import {
   CreatePostsInput,
   FindPostsInput,
   UpdatePostsInput,
-} from 'src/dtos/posts.input';
+} from 'src/posts/posts.input';
 
 @Injectable()
 export class PostsService {

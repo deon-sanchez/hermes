@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { CategoriesService } from './categories.service';
 import { CategoriesResolver } from './categories.resolver';
-import { Categories, CategoriesSchema } from 'src/models/categories.model';
+import { Categories, CategoriesSchema } from 'src/categories/categories.model';
 
 @Module({
   imports: [

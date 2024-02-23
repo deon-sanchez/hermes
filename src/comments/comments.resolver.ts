@@ -2,12 +2,12 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 
 import { CommentsService } from './comments.service';
-import { Comments } from 'src/models/comments.model';
+import { Comments } from 'src/comments/comments.model';
 import {
   CreateCommentInput,
   FindCommentsInput,
   UpdateCommentInput,
-} from 'src/dtos/comments.input';
+} from 'src/comments/comments.input';
 
 @Resolver(() => Comments)
 export class CommentsResolver {

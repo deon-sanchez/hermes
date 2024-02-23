@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
 
-import { CategoriesDocument, Categories } from 'src/models/categories.model';
+import {
+  CategoriesDocument,
+  Categories,
+} from 'src/categories/categories.model';
 import {
   CreateCategoryInput,
   FindCategoryInput,
   UpdateCategoryInput,
-} from 'src/dtos/categories.input';
+} from 'src/categories/categories.input';
 
 @Injectable()
 export class CategoriesService {

@@ -2,9 +2,9 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 
-import { Comments } from './comments.model';
-import { Categories } from './categories.model';
-import { Users } from './users.model';
+import { Comments } from '../comments/comments.model';
+import { Categories } from '../categories/categories.model';
+import { Users } from '../users/users.model';
 
 @ObjectType()
 @Schema({ timestamps: true })

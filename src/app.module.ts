@@ -4,10 +4,10 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { UsersModule } from 'src/modules/users/users.module';
-import { CategoriesModule } from 'src/modules/categories/categories.module';
-import { CommentsModule } from 'src/modules/comments/comments.module';
-import { PostsModule } from 'src/modules/posts/posts.module';
+import { UsersModule } from 'src/users/users.module';
+import { CategoriesModule } from 'src/categories/categories.module';
+import { CommentsModule } from 'src/comments/comments.module';
+import { PostsModule } from 'src/posts/posts.module';
 
 @Module({
   imports: [
