@@ -13,12 +13,12 @@ export class BlogsResolver {
   constructor(private readonly blogsService: BlogsService) {}
 
   @Query(() => [Blogs])
-  getBlogs(): Promise<Blogs[]> {
+  async getBlogs(): Promise<Blogs[]> {
     return this.blogsService.findAll();
   }
 
   @Query(() => Blogs)
-  getBlog(
+  async getBlog(
     @Args('findBlogsInput')
     findBlogsInput: FindBlogsInput,
   ): Promise<Blogs> {
@@ -26,21 +26,21 @@ export class BlogsResolver {
   }
 
   @Mutation(() => Blogs)
-  createBlogs(
+  async createBlogs(
     @Args('createBlogsInput') createBlogsInput: CreateBlogsInput,
   ): Promise<Blogs> {
     return this.blogsService.create(createBlogsInput);
   }
 
   @Mutation(() => Blogs)
-  updateBlogs(
+  async updateBlogs(
     @Args('updateBlogsInput') updateBlogsInput: UpdateBlogsInput,
   ): Promise<Blogs> {
     return this.blogsService.update(updateBlogsInput._id, updateBlogsInput);
   }
 
   @Mutation(() => Blogs)
-  deleteBlogs(
+  async deleteBlogs(
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
   ): Promise<Blogs> {
     return this.blogsService.delete(_id);

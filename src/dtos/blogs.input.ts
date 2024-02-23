@@ -1,17 +1,13 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { IsMongoId } from 'class-validator';
 import { Schema as MongooseSchema } from 'mongoose';
 
-@InputType({
-  description: 'Find blogs',
-})
+@InputType()
 export class FindBlogsInput {
   @Field(() => String)
-  @IsMongoId()
   _id: MongooseSchema.Types.ObjectId;
 }
 
-@InputType({ description: 'Create a Blogs' })
+@InputType()
 export class CreateBlogsInput {
   @Field(() => String)
   title: string;
@@ -23,7 +19,6 @@ export class CreateBlogsInput {
 @InputType()
 export class UpdateBlogsInput {
   @Field(() => String)
-  @IsMongoId()
   _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String, { nullable: true })

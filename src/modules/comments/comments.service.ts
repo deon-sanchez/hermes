@@ -12,21 +12,21 @@ import {
 export class CommentsService {
   constructor(
     @InjectModel(Comments.name)
-    private commentModel: Model<CommentsDocument>,
+    private commentsModel: Model<CommentsDocument>,
   ) {}
 
   async create(createCommentDto: CreateCommentInput): Promise<Comments> {
-    const createdComment = new this.commentModel(createCommentDto);
+    const createdComment = new this.commentsModel(createCommentDto);
     return createdComment.save();
   }
 
   async findAll(): Promise<Comments[]> {
-    return this.commentModel.find().exec();
+    return this.commentsModel.find().exec();
   }
 
   async findOne(findCommentInput: FindCommentsInput): Promise<Comments> {
     if (findCommentInput?._id) {
-      return await this.commentModel.findById(findCommentInput._id).exec();
+      return await this.commentsModel.findById(findCommentInput._id).exec();
     }
   }
 
@@ -34,12 +34,12 @@ export class CommentsService {
     _id: MongooseSchema.Types.ObjectId,
     updateCommentDto: UpdateCommentInput,
   ): Promise<Comments> {
-    return this.commentModel
+    return this.commentsModel
       .findByIdAndUpdate(_id, updateCommentDto, { new: true })
       .exec();
   }
 
   async delete(_id: MongooseSchema.Types.ObjectId): Promise<Comments> {
-    return this.commentModel.findByIdAndDelete(_id).exec();
+    return this.commentsModel.findByIdAndDelete(_id).exec();
   }
 }

@@ -1,7 +1,9 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { Users } from 'src/models/users.model';
+import { Comments } from './comments.model';
+import { Categories } from './categories.model';
+import { Users } from './users.model';
 
 @ObjectType({ description: 'Blogs Response' })
 @Schema({ timestamps: true })
@@ -26,6 +28,14 @@ export class Blogs {
   @Field(() => [Users])
   @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Users' }] })
   users: Users[];
+
+  @Field(() => [Comments])
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Comments' }] })
+  comments: Comments[];
+
+  @Field(() => [Categories])
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Categories' }] })
+  categories: Categories[];
 }
 
 export const BlogsSchema = SchemaFactory.createForClass(Blogs);
