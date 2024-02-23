@@ -14,12 +14,12 @@ export class CategoriesResolver {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Query(() => [Categories])
-  async getCategories(): Promise<Categories[]> {
+  async categories(): Promise<Categories[]> {
     return this.categoriesService.findAll();
   }
 
   @Query(() => Categories)
-  async getCategory(
+  async category(
     @Args('findCategoryInput') findCategoryInput: FindCategoryInput,
   ): Promise<Categories> {
     return this.categoriesService.findOne(findCategoryInput);

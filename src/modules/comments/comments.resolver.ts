@@ -14,12 +14,12 @@ export class CommentsResolver {
   constructor(private readonly commentsService: CommentsService) {}
 
   @Query(() => [Comments])
-  async getComments(): Promise<Comments[]> {
+  async comments(): Promise<Comments[]> {
     return this.commentsService.findAll();
   }
 
   @Query(() => Comments)
-  async getComment(
+  async comment(
     @Args('findCommentsInput') findCommentsInput: FindCommentsInput,
   ): Promise<Comments> {
     return this.commentsService.findOne(findCommentsInput);

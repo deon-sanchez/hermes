@@ -6,11 +6,12 @@ type Categories {
   description: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  posts: [Posts!]!
 }
 
 type Query {
-  getCategories: [Categories!]!
-  getCategory(findCategoryInput: FindCategoryInput!): Categories!
+  categories: [Categories!]!
+  category(findCategoryInput: FindCategoryInput!): Categories!
 }
 
 type Mutation {

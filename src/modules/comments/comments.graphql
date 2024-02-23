@@ -6,11 +6,13 @@ type Comments {
   createdAt: DateTime!
   updatedAt: DateTime!
   users: [Users!]!
+  posts: [Posts!]!
+
 }
 
 type Query {
-  getComments: [Comments!]!
-  getComment(findCommentsInput: FindCommentsInput!): Comments!
+  comments: [Comments!]!
+  comment(findCommentsInput: FindCommentsInput!): Comments!
 }
 
 type Mutation {

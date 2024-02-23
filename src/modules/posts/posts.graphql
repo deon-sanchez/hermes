@@ -12,8 +12,8 @@ type Posts {
 }
 
 type Query {
-  getPosts: [Posts!]!
-  getPost(findPostInput: FindPostInput!): Posts!
+  posts: [Posts!]!
+  post(findPostInput: FindPostInput!): Posts!
 }
 
 

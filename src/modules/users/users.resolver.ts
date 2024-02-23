@@ -9,12 +9,12 @@ export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
   @Query(() => [Users])
-  getUsers(): Promise<Users[]> {
+  users(): Promise<Users[]> {
     return this.usersService.findAll();
   }
 
   @Query(() => Users)
-  getUser(@Args('findUserInput') findUserInput: FindUserInput): Promise<Users> {
+  user(@Args('findUserInput') findUserInput: FindUserInput): Promise<Users> {
     return this.usersService.findOne(findUserInput);
   }
 

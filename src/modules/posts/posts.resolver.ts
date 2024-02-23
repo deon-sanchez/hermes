@@ -14,33 +14,33 @@ export class PostsResolver {
   constructor(private readonly postsService: PostsService) {}
 
   @Query(() => [Posts])
-  async getPosts(): Promise<Posts[]> {
+  async posts(): Promise<Posts[]> {
     return this.postsService.findAll();
   }
 
   @Query(() => Posts)
-  async getPost(
+  async post(
     @Args('findPostsInput')
     findPostsInput: FindPostsInput,
   ): Promise<Posts> {
     return this.postsService.findOne(findPostsInput);
   }
 
-  @Mutation(() => Posts)
+  @Mutation(() => Posts, { name: 'createPosts' })
   async createPosts(
     @Args('createPostsInput') createPostsInput: CreatePostsInput,
   ): Promise<Posts> {
     return this.postsService.create(createPostsInput);
   }
 
-  @Mutation(() => Posts)
+  @Mutation(() => Posts, { name: 'updatePosts' })
   async updatePosts(
     @Args('updatePostsInput') updatePostsInput: UpdatePostsInput,
   ): Promise<Posts> {
     return this.postsService.update(updatePostsInput._id, updatePostsInput);
   }
 
-  @Mutation(() => Posts)
+  @Mutation(() => Posts, { name: 'deletePosts' })
   async deletePosts(
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
   ): Promise<Posts> {

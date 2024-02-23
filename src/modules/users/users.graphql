@@ -7,11 +7,12 @@ type Users {
   createdAt: DateTime!
   updatedAt: DateTime!
   comments: [Comments!]!
+  posts: [Posts!]!
 }
 
 type Query {
-  getUsers: [Users!]!
-  getUser(findUserInput: FindUserInput!): Users!
+  users: [Users!]!
+  user(findUserInput: FindUserInput!): Users!
 }
 
 input FindUserInput {
