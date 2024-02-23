@@ -5,13 +5,19 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
 import { join } from 'path';
 
-import { PostsModule } from 'src/modules/posts/posts.module';
 import { UsersModule } from 'src/modules/users/users.module';
 import { CategoriesModule } from 'src/modules/categories/categories.module';
 import { CommentsModule } from 'src/modules/comments/comments.module';
+import { PostsModule } from 'src/modules/posts/posts.module';
 
 @Module({
   imports: [
+    // Importing the modules
+    PostsModule,
+    CategoriesModule,
+    CommentsModule,
+    UsersModule,
+
     // Global configuration module for environment variables
     ConfigModule.forRoot({
       envFilePath: '.env',
@@ -36,12 +42,6 @@ import { CommentsModule } from 'src/modules/comments/comments.module';
       introspection: true,
       cache: 'bounded',
     }),
-
-    // Importing the modules
-    PostsModule,
-    CategoriesModule,
-    CommentsModule,
-    UsersModule,
   ],
   controllers: [],
   providers: [],

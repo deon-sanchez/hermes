@@ -4,7 +4,7 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 
 import { Posts } from './posts.model';
 
-@ObjectType({ description: 'Categories Response' })
+@ObjectType()
 @Schema({ timestamps: true })
 export class Categories {
   @Field(() => String)

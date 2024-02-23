@@ -6,7 +6,7 @@ import { Comments } from './comments.model';
 import { Categories } from './categories.model';
 import { Users } from './users.model';
 
-@ObjectType({ description: 'Posts Response' })
+@ObjectType()
 @Schema({ timestamps: true })
 export class Posts {
   @Field(() => String)

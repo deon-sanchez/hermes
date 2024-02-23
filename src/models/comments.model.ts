@@ -5,7 +5,7 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Users } from './users.model';
 import { Posts } from './posts.model';
 
-@ObjectType({ description: 'Comments Response' })
+@ObjectType()
 @Schema({ timestamps: true })
 export class Comments {
   @Field(() => String)

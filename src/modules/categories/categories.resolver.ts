@@ -1,7 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Schema as MongooseSchema } from 'mongoose';
+
 import { CategoriesService } from './categories.service';
 import { Categories } from 'src/models/categories.model';
-import { Schema as MongooseSchema } from 'mongoose';
 import {
   CreateCategoryInput,
   FindCategoryInput,

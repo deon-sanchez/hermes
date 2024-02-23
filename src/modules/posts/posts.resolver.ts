@@ -1,7 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Schema as MongooseSchema } from 'mongoose';
+
 import { PostsService } from 'src/modules/posts/posts.service';
 import { Posts } from 'src/models/Posts.model';
-import { Schema as MongooseSchema } from 'mongoose';
 import {
   CreatePostsInput,
   FindPostsInput,

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
+
 import { CategoriesDocument, Categories } from 'src/models/categories.model';
 import {
   CreateCategoryInput,

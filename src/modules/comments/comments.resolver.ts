@@ -1,7 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Schema as MongooseSchema } from 'mongoose';
+
 import { CommentsService } from './comments.service';
 import { Comments } from 'src/models/comments.model';
-import { Schema as MongooseSchema } from 'mongoose';
 import {
   CreateCommentInput,
   FindCommentsInput,
