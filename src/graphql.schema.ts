@@ -8,13 +8,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export class FindCategoriesInput {
-    postId?: Nullable<string>;
-}
-
 export class CreateCategoryInput {
     name: string;
     description: string;
+    postId: string;
 }
 
 export class UpdateCategoryInput {
@@ -28,6 +25,10 @@ export class FindCategoryInput {
     _id: string;
 }
 
+export class FindCategoriesInput {
+    postId?: Nullable<string>;
+}
+
 export class CreateCommentInput {
     content: string;
 }
@@ -37,12 +38,13 @@ export class UpdateCommentInput {
     content?: Nullable<string>;
 }
 
-export class FindCommentsInput {
+export class FindCommentInput {
     _id: string;
 }
 
-export class FindCommentInput {
+export class FindCommentsInput {
     postId?: Nullable<string>;
+    userId?: Nullable<string>;
 }
 
 export class CreatePostsInput {
@@ -60,9 +62,10 @@ export class FindPostInput {
     _id: string;
 }
 
-export class FindUserInput {
-    _id: string;
-    email?: Nullable<string>;
+export class FindPostsInput {
+    categoryId?: Nullable<string>;
+    userId?: Nullable<string>;
+    commentId?: Nullable<string>;
 }
 
 export class CreateUserInput {
@@ -71,8 +74,14 @@ export class CreateUserInput {
     password: string;
 }
 
+export class FindUserInput {
+    _id: string;
+    email?: Nullable<string>;
+}
+
 export class FindUsersInput {
     postId?: Nullable<string>;
+    commentId?: Nullable<string>;
 }
 
 export class Categories {
