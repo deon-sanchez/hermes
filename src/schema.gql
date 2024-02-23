@@ -2,7 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""Users Response"""
+type Comments {
+  _id: String!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  users: [Users!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Users {
   _id: String!
   name: String!
@@ -12,21 +24,6 @@ type Users {
   comments: [Comments!]!
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-"""Comments Response"""
-type Comments {
-  _id: String!
-  content: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  users: [Users!]!
-}
-
-"""Categories Response"""
 type Categories {
   _id: String!
   name: String!
@@ -35,7 +32,6 @@ type Categories {
   updatedAt: DateTime!
 }
 
-"""Posts Response"""
 type Posts {
   _id: String!
   title: String!

@@ -3,7 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 
 import { Users } from './users.model';
-import { Posts } from './posts.model';
+// import { Posts } from './posts.model';
 
 @ObjectType()
 @Schema({ timestamps: true })
@@ -25,9 +25,9 @@ export class Comments {
   @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Users' }] })
   users: Users[];
 
-  @Field(() => [Posts])
-  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Posts' }] })
-  posts: Posts[];
+  // @Field(() => [Posts])
+  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Posts' }] })
+  // posts: Posts[];
 }
 
 export const CommentsSchema = SchemaFactory.createForClass(Comments);
