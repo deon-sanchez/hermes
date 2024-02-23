@@ -8,15 +8,17 @@ import {
 } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 
-import { CategoriesService } from './categories.service';
-import { Categories } from 'src/categories/categories.model';
 import {
   CreateCategoryInput,
   FindCategoriesInput,
   FindCategoryInput,
   UpdateCategoryInput,
 } from 'src/categories/categories.input';
+
 import { PostsService } from 'src/posts/posts.service';
+import { CategoriesService } from './categories.service';
+
+import { Categories } from 'src/categories/categories.model';
 
 @Resolver(() => Categories)
 export class CategoriesResolver {
