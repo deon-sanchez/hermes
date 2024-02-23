@@ -8,6 +8,7 @@ import {
 } from 'src/categories/categories.model';
 import {
   CreateCategoryInput,
+  FindCategoriesInput,
   FindCategoryInput,
   UpdateCategoryInput,
 } from 'src/categories/categories.input';
@@ -24,7 +25,14 @@ export class CategoriesService {
     return createdCategory.save();
   }
 
-  async findAll(): Promise<Categories[]> {
+  async findAll(
+    findCategoriesInput: FindCategoriesInput,
+  ): Promise<Categories[]> {
+    if (findCategoriesInput.postId) {
+      return this.categoryModel
+        .find({ postId: findCategoriesInput.postId })
+        .exec();
+    }
     return this.categoryModel.find().exec();
   }
 

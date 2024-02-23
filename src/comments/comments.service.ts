@@ -5,6 +5,7 @@ import { Model, Schema as MongooseSchema } from 'mongoose';
 import { CommentsDocument, Comments } from 'src/comments/comments.model';
 import {
   CreateCommentInput,
+  FindCommentInput,
   FindCommentsInput,
   UpdateCommentInput,
 } from 'src/comments/comments.input';
@@ -21,7 +22,12 @@ export class CommentsService {
     return createdComment.save();
   }
 
-  async findAll(): Promise<Comments[]> {
+  async findAll(findCommentInput: FindCommentInput): Promise<Comments[]> {
+    if (findCommentInput?.postId) {
+      return this.commentsModel
+        .find({ postId: findCommentInput.postId })
+        .exec();
+    }
     return this.commentsModel.find().exec();
   }
 

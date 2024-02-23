@@ -2,6 +2,11 @@ import { Field, InputType } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 
 @InputType()
+export class FindUsersInput {
+  @Field(() => String)
+  postId: MongooseSchema.Types.ObjectId;
+}
+
 export class FindUserInput {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;

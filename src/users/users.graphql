@@ -11,7 +11,7 @@ type Users {
 }
 
 type Query {
-  users: [Users!]!
+  users(findUsersInput: FindUsersInput): [Users!]!
   user(findUserInput: FindUserInput!): Users!
 }
 
@@ -28,4 +28,9 @@ input CreateUserInput {
   name: String!
   email: String!
   password: String!
+}
+
+input FindUsersInput {
+  postId: String
+
 }

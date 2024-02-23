@@ -5,6 +5,7 @@ import { CommentsService } from './comments.service';
 import { Comments } from 'src/comments/comments.model';
 import {
   CreateCommentInput,
+  FindCommentInput,
   FindCommentsInput,
   UpdateCommentInput,
 } from 'src/comments/comments.input';
@@ -14,8 +15,8 @@ export class CommentsResolver {
   constructor(private readonly commentsService: CommentsService) {}
 
   @Query(() => [Comments])
-  async comments(): Promise<Comments[]> {
-    return this.commentsService.findAll();
+  async comments(findCommentInput: FindCommentInput): Promise<Comments[]> {
+    return this.commentsService.findAll(findCommentInput);
   }
 
   @Query(() => Comments)

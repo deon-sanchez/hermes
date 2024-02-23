@@ -8,6 +8,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export class FindCategoriesInput {
+    postId?: Nullable<string>;
+}
+
 export class CreateCategoryInput {
     name: string;
     description: string;
@@ -17,6 +21,7 @@ export class UpdateCategoryInput {
     _id: string;
     name?: Nullable<string>;
     description?: Nullable<string>;
+    postId: string;
 }
 
 export class FindCategoryInput {
@@ -34,6 +39,10 @@ export class UpdateCommentInput {
 
 export class FindCommentsInput {
     _id: string;
+}
+
+export class FindCommentInput {
+    postId?: Nullable<string>;
 }
 
 export class CreatePostsInput {
@@ -62,8 +71,13 @@ export class CreateUserInput {
     password: string;
 }
 
+export class FindUsersInput {
+    postId?: Nullable<string>;
+}
+
 export class Categories {
     _id: string;
+    postId: string;
     name: string;
     description: string;
     createdAt: DateTime;
@@ -72,11 +86,11 @@ export class Categories {
 }
 
 export abstract class IQuery {
-    abstract categories(): Categories[] | Promise<Categories[]>;
+    abstract categories(findCategoriesInput?: Nullable<FindCategoriesInput>): Categories[] | Promise<Categories[]>;
 
     abstract category(findCategoryInput: FindCategoryInput): Categories | Promise<Categories>;
 
-    abstract comments(): Comments[] | Promise<Comments[]>;
+    abstract comments(findCommentInput?: Nullable<FindCommentInput>): Comments[] | Promise<Comments[]>;
 
     abstract comment(findCommentsInput: FindCommentsInput): Comments | Promise<Comments>;
 
@@ -84,7 +98,7 @@ export abstract class IQuery {
 
     abstract post(findPostInput: FindPostInput): Posts | Promise<Posts>;
 
-    abstract users(): Users[] | Promise<Users[]>;
+    abstract users(findUsersInput?: Nullable<FindUsersInput>): Users[] | Promise<Users[]>;
 
     abstract user(findUserInput: FindUserInput): Users | Promise<Users>;
 }

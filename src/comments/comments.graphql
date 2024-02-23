@@ -11,7 +11,7 @@ type Comments {
 }
 
 type Query {
-  comments: [Comments!]!
+  comments(findCommentInput:FindCommentInput): [Comments!]!
   comment(findCommentsInput: FindCommentsInput!): Comments!
 }
 
@@ -32,4 +32,8 @@ input UpdateCommentInput {
 
 input FindCommentsInput {
   _id: String!
+}
+
+input FindCommentInput {
+  postId: String
 }

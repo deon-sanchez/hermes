@@ -1,7 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { Users } from 'src/users/users.model';
-import { CreateUserInput, FindUserInput } from 'src/users/users.input';
+import {
+  CreateUserInput,
+  FindUserInput,
+  FindUsersInput,
+} from 'src/users/users.input';
 import { UsersService } from './users.service';
 
 @Resolver(() => Users)
@@ -9,8 +13,8 @@ export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
   @Query(() => [Users])
-  users(): Promise<Users[]> {
-    return this.usersService.findAll();
+  users(findUsersInput: FindUsersInput): Promise<Users[]> {
+    return this.usersService.findAll(findUsersInput);
   }
 
   @Query(() => Users)

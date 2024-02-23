@@ -5,6 +5,7 @@ import { CategoriesService } from './categories.service';
 import { Categories } from 'src/categories/categories.model';
 import {
   CreateCategoryInput,
+  FindCategoriesInput,
   FindCategoryInput,
   UpdateCategoryInput,
 } from 'src/categories/categories.input';
@@ -14,8 +15,10 @@ export class CategoriesResolver {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Query(() => [Categories])
-  async categories(): Promise<Categories[]> {
-    return this.categoriesService.findAll();
+  async categories(
+    findCategoriesInput: FindCategoriesInput,
+  ): Promise<Categories[]> {
+    return this.categoriesService.findAll(findCategoriesInput);
   }
 
   @Query(() => Categories)

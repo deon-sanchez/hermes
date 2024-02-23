@@ -13,6 +13,15 @@ export class Posts {
   _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String)
+  categoryId: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String)
+  userId: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String)
+  commentId: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String)
   @Prop({ type: String, required: true })
   title: string;
 

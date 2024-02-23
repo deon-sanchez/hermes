@@ -2,6 +2,7 @@ scalar DateTime
 
 type Categories {
   _id: String!
+  postId: String!
   name: String!
   description: String!
   createdAt: DateTime!
@@ -10,7 +11,7 @@ type Categories {
 }
 
 type Query {
-  categories: [Categories!]!
+  categories(findCategoriesInput: FindCategoriesInput): [Categories!]!
   category(findCategoryInput: FindCategoryInput!): Categories!
 }
 
@@ -18,6 +19,10 @@ type Mutation {
   createCategory(createCategoryInput: CreateCategoryInput!): Categories!
   updateCategory(updateCategoryInput: UpdateCategoryInput!): Categories!
   deleteCategory(_id: String!): Categories!
+}
+
+input FindCategoriesInput {
+  postId: String
 }
 
 input CreateCategoryInput {
@@ -29,6 +34,7 @@ input UpdateCategoryInput {
   _id: String!
   name: String
   description: String
+  postId: String!
 }
 
 input FindCategoryInput {

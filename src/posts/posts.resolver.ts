@@ -4,7 +4,6 @@ import {
   Parent,
   Query,
   ResolveField,
-  ResolveProperty,
   Resolver,
 } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
@@ -16,9 +15,6 @@ import {
   FindPostsInput,
   UpdatePostsInput,
 } from 'src/posts/posts.input';
-import { Categories } from 'src/categories/categories.model';
-import { Comments } from 'src/comments/comments.model';
-import { Users } from 'src/users/users.model';
 import { UsersService } from 'src/users/users.service';
 import { CategoriesService } from 'src/categories/categories.service';
 import { CommentsService } from 'src/comments/comments.service';
@@ -69,18 +65,18 @@ export class PostsResolver {
   @ResolveField()
   async categories(@Parent() post: Posts) {
     const { _id } = post;
-    return this.categoriesServices.findAll();
+    return this.categoriesServices.findAll({ postId: _id });
   }
 
   @ResolveField()
   async comments(@Parent() post: Posts) {
     const { _id } = post;
-    return this.commentsServices.findAll();
+    return this.commentsServices.findAll({ postId: _id });
   }
 
   @ResolveField()
   async users(@Parent() post: Posts) {
     const { _id } = post;
-    return this.usersServices.findAll();
+    return this.usersServices.findAll({ postId: _id });
   }
 }

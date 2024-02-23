@@ -11,6 +11,9 @@ export class Categories {
   _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String)
+  postId: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String)
   @Prop({ type: String, required: true })
   name: string;
 

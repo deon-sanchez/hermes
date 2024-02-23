@@ -7,7 +7,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { UsersDocument, Users } from 'src/users/users.model';
-import { CreateUserInput, FindUserInput } from 'src/users/users.input';
+import {
+  CreateUserInput,
+  FindUserInput,
+  FindUsersInput,
+} from 'src/users/users.input';
 
 @Injectable()
 export class UsersService {
@@ -20,12 +24,21 @@ export class UsersService {
     return createdUser.save();
   }
 
-  async findAll(): Promise<Users[]> {
-    const users = await this.userModel.find().lean().exec();
+  async findAll(findUsersInput: FindUsersInput): Promise<Users[]> {
+    let users: Users[];
+
+    if (findUsersInput.postId) {
+      users = await this.userModel
+        .find({ postId: findUsersInput.postId })
+        .exec();
+    } else {
+      users = await this.userModel.find().exec();
+    }
 
     if (!users) {
       throw new InternalServerErrorException();
     }
+
     return users;
   }
 
