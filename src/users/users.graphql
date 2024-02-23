@@ -15,11 +15,6 @@ type Query {
   user(findUserInput: FindUserInput!): Users!
 }
 
-input FindUserInput {
-  _id: String!
-  email: String
-}
-
 type Mutation {
   createUser(createUserInput: CreateUserInput!): Users!
 }
@@ -30,7 +25,12 @@ input CreateUserInput {
   password: String!
 }
 
+input FindUserInput {
+  _id: String!
+  email: String
+}
+
 input FindUsersInput {
   postId: String
-
+  commentId: String
 }

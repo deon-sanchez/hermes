@@ -30,10 +30,11 @@ input UpdateCommentInput {
   content: String
 }
 
-input FindCommentsInput {
+input FindCommentInput {
   _id: String!
 }
 
-input FindCommentInput {
+input FindCommentsInput {
   postId: String
+  userId: String
 }

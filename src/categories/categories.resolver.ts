@@ -1,4 +1,11 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 
 import { CategoriesService } from './categories.service';
@@ -9,14 +16,18 @@ import {
   FindCategoryInput,
   UpdateCategoryInput,
 } from 'src/categories/categories.input';
+import { PostsService } from 'src/posts/posts.service';
 
 @Resolver(() => Categories)
 export class CategoriesResolver {
-  constructor(private readonly categoriesService: CategoriesService) {}
+  constructor(
+    private readonly categoriesService: CategoriesService,
+    private readonly postsService: PostsService,
+  ) {}
 
   @Query(() => [Categories])
   async categories(
-    findCategoriesInput: FindCategoriesInput,
+    @Args('findCategoriesInput') findCategoriesInput: FindCategoriesInput,
   ): Promise<Categories[]> {
     return this.categoriesService.findAll(findCategoriesInput);
   }
@@ -50,5 +61,11 @@ export class CategoriesResolver {
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
   ): Promise<Categories> {
     return this.categoriesService.delete(_id);
+  }
+
+  @ResolveField()
+  async posts(@Parent() category: Categories) {
+    const { _id } = category;
+    return this.postsService.findAll({ categoryId: _id });
   }
 }

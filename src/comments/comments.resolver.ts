@@ -15,15 +15,17 @@ export class CommentsResolver {
   constructor(private readonly commentsService: CommentsService) {}
 
   @Query(() => [Comments])
-  async comments(findCommentInput: FindCommentInput): Promise<Comments[]> {
-    return this.commentsService.findAll(findCommentInput);
+  async comments(
+    @Args('findCommentsInput') findCommentsInput: FindCommentsInput,
+  ): Promise<Comments[]> {
+    return this.commentsService.findAll(findCommentsInput);
   }
 
   @Query(() => Comments)
   async comment(
-    @Args('findCommentsInput') findCommentsInput: FindCommentsInput,
+    @Args('findCommentInput') findCommentInput: FindCommentInput,
   ): Promise<Comments> {
-    return this.commentsService.findOne(findCommentsInput);
+    return this.commentsService.findOne(findCommentInput);
   }
 
   @Mutation(() => Comments)

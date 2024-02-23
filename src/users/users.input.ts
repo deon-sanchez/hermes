@@ -4,7 +4,10 @@ import { Schema as MongooseSchema } from 'mongoose';
 @InputType()
 export class FindUsersInput {
   @Field(() => String)
-  postId: MongooseSchema.Types.ObjectId;
+  postId?: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String)
+  commentId?: MongooseSchema.Types.ObjectId;
 }
 
 export class FindUserInput {

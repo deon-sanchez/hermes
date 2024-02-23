@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
 
@@ -20,36 +20,66 @@ export class CategoriesService {
     private categoryModel: Model<CategoriesDocument>,
   ) {}
 
-  async create(createCategoryDto: CreateCategoryInput): Promise<Categories> {
-    const createdCategory = new this.categoryModel(createCategoryDto);
-    return createdCategory.save();
-  }
-
   async findAll(
     findCategoriesInput: FindCategoriesInput,
   ): Promise<Categories[]> {
-    if (findCategoriesInput.postId) {
-      return this.categoryModel
-        .find({ postId: findCategoriesInput.postId })
-        .exec();
+    try {
+      if (findCategoriesInput.postId) {
+        return await this.categoryModel
+          .find({ postId: findCategoriesInput.postId })
+          .exec();
+      }
+      return this.categoryModel.find().exec();
+    } catch (error) {
+      throw new InternalServerErrorException('Error finding categories');
     }
-    return this.categoryModel.find().exec();
   }
 
   async findOne(findCategoryInput: FindCategoryInput): Promise<Categories> {
-    return this.categoryModel.findById(findCategoryInput._id).exec();
+    const category = await this.categoryModel
+      .findById(findCategoryInput._id)
+      .exec();
+
+    if (!category) {
+      throw new InternalServerErrorException('Error finding category');
+    }
+    return category;
+  }
+
+  async create(createCategoryDto: CreateCategoryInput): Promise<Categories> {
+    try {
+      const createdCategory = new this.categoryModel(createCategoryDto);
+
+      return createdCategory.save();
+    } catch (error) {
+      throw new InternalServerErrorException('Error creating category');
+    }
   }
 
   async update(
     _id: MongooseSchema.Types.ObjectId,
     updateCategoryDto: UpdateCategoryInput,
   ): Promise<Categories> {
-    return this.categoryModel
+    const updatedCategory = await this.categoryModel
       .findByIdAndUpdate(_id, updateCategoryDto, { new: true })
       .exec();
+
+    if (!updatedCategory) {
+      throw new InternalServerErrorException('Error updating category');
+    }
+
+    return updatedCategory;
   }
 
   async delete(_id: MongooseSchema.Types.ObjectId): Promise<Categories> {
-    return this.categoryModel.findByIdAndDelete(_id).exec();
+    const deletedCategory = await this.categoryModel
+      .findByIdAndDelete(_id)
+      .exec();
+
+    if (!deletedCategory) {
+      throw new InternalServerErrorException('Error deleting category');
+    }
+
+    return deletedCategory;
   }
 }

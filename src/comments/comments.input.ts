@@ -2,13 +2,16 @@ import { InputType, Field } from '@nestjs/graphql';
 import { Schema as MongooseSchema } from 'mongoose';
 
 @InputType()
-export class FindCommentInput {
+export class FindCommentsInput {
   @Field(() => String)
-  postId: MongooseSchema.Types.ObjectId;
+  postId?: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String)
+  userId?: MongooseSchema.Types.ObjectId;
 }
 
 @InputType()
-export class FindCommentsInput {
+export class FindCommentInput {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
 }

@@ -12,6 +12,7 @@ import { PostsService } from 'src/posts/posts.service';
 import { Posts } from 'src/posts/posts.model';
 import {
   CreatePostsInput,
+  FindPostInput,
   FindPostsInput,
   UpdatePostsInput,
 } from 'src/posts/posts.input';
@@ -29,16 +30,19 @@ export class PostsResolver {
   ) {}
 
   @Query(() => [Posts])
-  async posts(): Promise<Posts[]> {
-    return this.postsService.findAll();
+  async posts(
+    @Args('findPostsInput')
+    findPostsInput: FindPostsInput,
+  ): Promise<Posts[]> {
+    return this.postsService.findAll(findPostsInput);
   }
 
   @Query(() => Posts)
   async post(
     @Args('findPostsInput')
-    findPostsInput: FindPostsInput,
+    findPostInput: FindPostInput,
   ): Promise<Posts> {
-    return this.postsService.findOne(findPostsInput);
+    return this.postsService.findOne(findPostInput);
   }
 
   @Mutation(() => Posts, { name: 'createPosts' })

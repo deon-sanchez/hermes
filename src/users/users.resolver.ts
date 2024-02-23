@@ -13,7 +13,9 @@ export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
   @Query(() => [Users])
-  users(findUsersInput: FindUsersInput): Promise<Users[]> {
+  users(
+    @Args('findUsersInput') findUsersInput: FindUsersInput,
+  ): Promise<Users[]> {
     return this.usersService.findAll(findUsersInput);
   }
 

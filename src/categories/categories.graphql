@@ -21,13 +21,10 @@ type Mutation {
   deleteCategory(_id: String!): Categories!
 }
 
-input FindCategoriesInput {
-  postId: String
-}
-
 input CreateCategoryInput {
   name: String!
   description: String!
+  postId: String!
 }
 
 input UpdateCategoryInput {
@@ -39,4 +36,8 @@ input UpdateCategoryInput {
 
 input FindCategoryInput {
   _id: String!
+}
+
+input FindCategoriesInput {
+  postId: String
 }

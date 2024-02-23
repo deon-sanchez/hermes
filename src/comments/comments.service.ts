@@ -22,16 +22,16 @@ export class CommentsService {
     return createdComment.save();
   }
 
-  async findAll(findCommentInput: FindCommentInput): Promise<Comments[]> {
-    if (findCommentInput?.postId) {
+  async findAll(findCommentsInput: FindCommentsInput): Promise<Comments[]> {
+    if (findCommentsInput?.postId) {
       return this.commentsModel
-        .find({ postId: findCommentInput.postId })
+        .find({ postId: findCommentsInput.postId })
         .exec();
     }
     return this.commentsModel.find().exec();
   }
 
-  async findOne(findCommentInput: FindCommentsInput): Promise<Comments> {
+  async findOne(findCommentInput: FindCommentInput): Promise<Comments> {
     if (findCommentInput?._id) {
       return await this.commentsModel.findById(findCommentInput._id).exec();
     }

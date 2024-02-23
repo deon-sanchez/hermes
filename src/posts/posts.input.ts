@@ -4,6 +4,18 @@ import { Schema as MongooseSchema } from 'mongoose';
 @InputType()
 export class FindPostsInput {
   @Field(() => String)
+  categoryId?: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String)
+  userId?: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String)
+  commentId?: MongooseSchema.Types.ObjectId;
+}
+
+@InputType()
+export class FindPostInput {
+  @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
 }
 

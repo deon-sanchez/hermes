@@ -27,9 +27,13 @@ export class UsersService {
   async findAll(findUsersInput: FindUsersInput): Promise<Users[]> {
     let users: Users[];
 
-    if (findUsersInput.postId) {
+    if (findUsersInput?.postId) {
       users = await this.userModel
         .find({ postId: findUsersInput.postId })
+        .exec();
+    } else if (findUsersInput?.commentId) {
+      users = await this.userModel
+        .find({ commentId: findUsersInput.commentId })
         .exec();
     } else {
       users = await this.userModel.find().exec();
