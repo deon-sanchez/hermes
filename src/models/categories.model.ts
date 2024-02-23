@@ -2,7 +2,6 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Blogs } from './blogs.model';
-// import { Blogs } from './blogs.model';
 
 @ObjectType({ description: 'Categories Response' })
 @Schema({ timestamps: true })
