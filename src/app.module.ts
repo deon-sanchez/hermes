@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
-import { join } from 'path';
 
 import { UsersModule } from 'src/modules/users/users.module';
 import { CategoriesModule } from 'src/modules/categories/categories.module';
@@ -37,10 +36,8 @@ import { PostsModule } from 'src/modules/posts/posts.module';
     // GraphQL module setup with async configuration
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      playground: false,
-      introspection: true,
-      cache: 'bounded',
+      typePaths: ['./**/*.graphql'],
+      installSubscriptionHandlers: true,
     }),
   ],
   controllers: [],

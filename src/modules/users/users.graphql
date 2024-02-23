@@ -1,0 +1,30 @@
+scalar DateTime
+
+type Users {
+  _id: String!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  comments: [Comments!]!
+}
+
+type Query {
+  getUsers: [Users!]!
+  getUser(findUserInput: FindUserInput!): Users!
+}
+
+input FindUserInput {
+  _id: String!
+  email: String
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): Users!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}

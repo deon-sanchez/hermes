@@ -19,7 +19,7 @@ export class PostsResolver {
   }
 
   @Query(() => Posts)
-  async getBlog(
+  async getPost(
     @Args('findPostsInput')
     findPostsInput: FindPostsInput,
   ): Promise<Posts> {

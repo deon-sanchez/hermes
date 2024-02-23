@@ -1,0 +1,39 @@
+scalar DateTime
+
+type Posts {
+  _id: String!
+  title: String!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  users: [Users!]!
+  comments: [Comments!]!
+  categories: [Categories!]!
+}
+
+type Query {
+  getPosts: [Posts!]!
+  getPost(findPostInput: FindPostInput!): Posts!
+}
+
+
+type Mutation {
+  createPosts(createPostsInput: CreatePostsInput!): Posts!
+  updatePosts(updatePostsInput: UpdatePostsInput!): Posts!
+  deletePosts(_id: String!): Posts!
+}
+
+input CreatePostsInput {
+  title: String!
+  content: String!
+}
+
+input UpdatePostsInput {
+  _id: String!
+  title: String
+  content: String
+}
+
+input FindPostInput {
+  _id: String!
+}

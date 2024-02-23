@@ -1,0 +1,35 @@
+scalar DateTime
+
+type Categories {
+  _id: String!
+  name: String!
+  description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  getCategories: [Categories!]!
+  getCategory(findCategoryInput: FindCategoryInput!): Categories!
+}
+
+type Mutation {
+  createCategory(createCategoryInput: CreateCategoryInput!): Categories!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Categories!
+  deleteCategory(_id: String!): Categories!
+}
+
+input CreateCategoryInput {
+  name: String!
+  description: String!
+}
+
+input UpdateCategoryInput {
+  _id: String!
+  name: String
+  description: String
+}
+
+input FindCategoryInput {
+  _id: String!
+}

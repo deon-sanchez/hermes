@@ -1,0 +1,33 @@
+scalar DateTime
+
+type Comments {
+  _id: String!
+  content: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  users: [Users!]!
+}
+
+type Query {
+  getComments: [Comments!]!
+  getComment(findCommentsInput: FindCommentsInput!): Comments!
+}
+
+type Mutation {
+  createComment(createCommentInput: CreateCommentInput!): Comments!
+  updateComment(updateCommentInput: UpdateCommentInput!): Comments!
+  deleteComment(_id: String!): Comments!
+}
+
+input CreateCommentInput {
+  content: String!
+}
+
+input UpdateCommentInput {
+  _id: String!
+  content: String
+}
+
+input FindCommentsInput {
+  _id: String!
+}
