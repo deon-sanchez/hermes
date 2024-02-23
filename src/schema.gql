@@ -45,7 +45,7 @@ type Comments {
 
 type Query {
   getBlogs: [Blogs!]!
-  getBlogs(findBlogsInput: FindBlogsInput!): Blogs!
+  getBlog(findBlogsInput: FindBlogsInput!): Blogs!
   getComments: [Comments!]!
   getComment(findCommentsInput: FindCommentsInput!): Comments!
   getUsers: [Users!]!

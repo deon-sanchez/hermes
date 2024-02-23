@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { BlogsResolver } from './blogs.resolver';
-import { BlogsService } from './blogs.service';
 import { MongooseModule } from '@nestjs/mongoose';
+
+import { BlogsResolver } from 'src/modules/blogs/blogs.resolver';
+import { BlogsService } from 'src/modules/blogs/blogs.service';
 import { Blogs, BlogsSchema } from 'src/models/blogs.model';
 
 @Module({

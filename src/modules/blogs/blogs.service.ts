@@ -11,21 +11,21 @@ import {
 @Injectable()
 export class BlogsService {
   constructor(
-    @InjectModel(Blogs.name) private BlogsModel: Model<BlogsDocument>,
+    @InjectModel(Blogs.name) private blogsModel: Model<BlogsDocument>,
   ) {}
 
   async create(createBlogsDto: CreateBlogsInput): Promise<Blogs> {
-    const createdBlogs = new this.BlogsModel(createBlogsDto);
+    const createdBlogs = new this.blogsModel(createBlogsDto);
     return createdBlogs.save();
   }
 
   async findAll(): Promise<Blogs[]> {
-    return this.BlogsModel.find().exec();
+    return this.blogsModel.find().exec();
   }
 
   async findOne(findBlogsInput: FindBlogsInput): Promise<Blogs> {
     if (findBlogsInput?._id) {
-      return await this.BlogsModel.findById(findBlogsInput._id).exec();
+      return await this.blogsModel.findById(findBlogsInput._id).exec();
     }
   }
 
@@ -33,12 +33,14 @@ export class BlogsService {
     _id: MongooseSchema.Types.ObjectId,
     updateBlogsDto: UpdateBlogsInput,
   ): Promise<Blogs> {
-    return this.BlogsModel.findByIdAndUpdate(_id, updateBlogsDto, {
-      new: true,
-    }).exec();
+    return this.blogsModel
+      .findByIdAndUpdate(_id, updateBlogsDto, {
+        new: true,
+      })
+      .exec();
   }
 
   async delete(_id: MongooseSchema.Types.ObjectId): Promise<Blogs> {
-    return this.BlogsModel.findByIdAndDelete(_id).exec();
+    return this.blogsModel.findByIdAndDelete(_id).exec();
   }
 }

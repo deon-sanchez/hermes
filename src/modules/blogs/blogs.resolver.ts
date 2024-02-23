@@ -1,5 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { BlogsService } from './blogs.service';
+import { BlogsService } from 'src/modules/blogs/blogs.service';
 import { Blogs } from 'src/models/Blogs.model';
 import { Schema as MongooseSchema } from 'mongoose';
 import {

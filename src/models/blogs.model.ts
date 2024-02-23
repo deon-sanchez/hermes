@@ -1,7 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { Users } from './users.model';
+import { Users } from 'src/models/users.model';
 
 @ObjectType({ description: 'Blogs Response' })
 @Schema({ timestamps: true })
