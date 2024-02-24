@@ -29,13 +29,13 @@ export class Comments {
   @Field()
   updatedAt: Date;
 
-  // @Field(() => [Users])
-  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Users' }] })
-  // users: Users[];
+  @Field()
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Users' }] })
+  user: Users;
 
-  // @Field(() => [Posts])
-  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Posts' }] })
-  // posts: Posts[];
+  @Field()
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Posts' }] })
+  post: Posts;
 }
 
 export const CommentsSchema = SchemaFactory.createForClass(Comments);

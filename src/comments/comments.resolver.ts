@@ -67,15 +67,15 @@ export class CommentsResolver {
     return this.commentsService.delete(_id);
   }
 
-  // @ResolveField()
-  // async users(@Parent() comments: Comments) {
-  //   const { _id } = comments;
-  //   return this.usersService.findAll({ commentId: _id });
-  // }
+  @ResolveField()
+  async user(@Parent() comments: Comments) {
+    const { userId } = comments;
+    return this.usersService.findOne({ _id: userId, email: null });
+  }
 
-  // @ResolveField()
-  // async posts(@Parent() comments: Comments) {
-  //   const { _id } = comments;
-  //   return this.postsService.findAll({ commentId: _id });
-  // }
+  @ResolveField()
+  async post(@Parent() comments: Comments) {
+    const { postId } = comments;
+    return this.postsService.findOne({ _id: postId });
+  }
 }

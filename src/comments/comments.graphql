@@ -7,12 +7,14 @@ type Comments {
   content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  user: Users!
+  post: Posts!
 }
 
-type CommentsRelationships {
-  users: [Users!]!
-  posts: [Posts!]!
-}
+# type CommentsRelationships {
+#   users: Users!
+#   posts: Posts!
+# }
 
 type Query {
   comments(findCommentInput:FindCommentInput): [Comments!]!
