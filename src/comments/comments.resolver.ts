@@ -29,28 +29,28 @@ export class CommentsResolver {
     private readonly postsService: PostsService,
   ) {}
 
-  @Query(() => [Comments])
+  @Query()
   async comments(
     @Args('findCommentsInput') findCommentsInput: FindCommentsInput,
   ): Promise<Comments[]> {
     return this.commentsService.findAll(findCommentsInput);
   }
 
-  @Query(() => Comments)
+  @Query()
   async comment(
     @Args('findCommentInput') findCommentInput: FindCommentInput,
   ): Promise<Comments> {
     return this.commentsService.findOne(findCommentInput);
   }
 
-  @Mutation(() => Comments)
+  @Mutation()
   async createComment(
     @Args('createCommentInput') createCommentInput: CreateCommentInput,
   ): Promise<Comments> {
     return this.commentsService.create(createCommentInput);
   }
 
-  @Mutation(() => Comments)
+  @Mutation()
   async updateComment(
     @Args('updateCommentInput') updateCommentInput: UpdateCommentInput,
   ): Promise<Comments> {
@@ -60,9 +60,9 @@ export class CommentsResolver {
     );
   }
 
-  @Mutation(() => Comments)
+  @Mutation()
   async deleteComment(
-    @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
+    @Args('_id') _id: MongooseSchema.Types.ObjectId,
   ): Promise<Comments> {
     return this.commentsService.delete(_id);
   }

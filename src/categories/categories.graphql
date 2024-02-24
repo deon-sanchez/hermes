@@ -1,7 +1,5 @@
 scalar DateTime
 
-union CategoriesUnion = Categories | CategoriesRelationships
-
 type Categories {
   _id: ID!
   name: String!

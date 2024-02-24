@@ -1,4 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
+import { IsNotEmpty } from 'class-validator';
 import { Schema as MongooseSchema } from 'mongoose';
 
 @InputType()
@@ -10,6 +11,7 @@ export class FindCategoryInput {
 @InputType()
 export class CreateCategoryInput {
   @Field()
+  @IsNotEmpty()
   name: string;
 
   @Field()
@@ -22,6 +24,7 @@ export class UpdateCategoryInput {
   _id: MongooseSchema.Types.ObjectId;
 
   @Field()
+  @IsNotEmpty()
   name: string;
 
   @Field()

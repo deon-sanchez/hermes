@@ -1,9 +1,9 @@
 scalar DateTime
 
-union CommentsUnion = Comments | CommentsRelationships
-
 type Comments {
-  _id: String!
+  _id: ID!
+  postId: ID!
+  userId: ID!
   content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -22,23 +22,25 @@ type Query {
 type Mutation {
   createComment(createCommentInput: CreateCommentInput!): Comments!
   updateComment(updateCommentInput: UpdateCommentInput!): Comments!
-  deleteComment(_id: String!): Comments!
+  deleteComment(_id: ID!): Comments!
 }
 
 input CreateCommentInput {
+  postId: ID!
+  userId: ID!
   content: String!
 }
 
 input UpdateCommentInput {
-  _id: String!
-  content: String
+  _id: ID!
+  content: String!
 }
 
 input FindCommentInput {
-  _id: String!
+  _id: ID!
 }
 
 input FindCommentsInput {
-  postId: String
-  userId: String
+  postId: ID
+  userId: ID
 }

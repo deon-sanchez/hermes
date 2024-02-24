@@ -12,21 +12,23 @@ export class Users {
   _id: MongooseSchema.Types.ObjectId;
 
   @Field()
+  @Prop({ required: true })
   postId: MongooseSchema.Types.ObjectId;
 
   @Field()
+  @Prop({ required: true })
   commentId: MongooseSchema.Types.ObjectId;
 
   @Field()
-  @Prop({ type: String, required: true })
+  @Prop({ required: true })
   name: string;
 
   @Field()
-  @Prop({ type: String, required: true, unique: true })
+  @Prop({ required: true, unique: true })
   email: string;
 
   @HideField()
-  @Prop({ type: String, required: true })
+  @Prop({ required: true })
   password: string;
 
   @Field()

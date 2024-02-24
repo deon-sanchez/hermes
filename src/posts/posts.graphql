@@ -1,7 +1,5 @@
 scalar DateTime
 
-union PostsUnion = Posts | PostsRelationships
-
 type Posts {
   _id: ID!
   categoryId: ID!

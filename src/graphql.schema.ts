@@ -24,12 +24,14 @@ export class FindCategoryInput {
 }
 
 export class CreateCommentInput {
+    postId: string;
+    userId: string;
     content: string;
 }
 
 export class UpdateCommentInput {
     _id: string;
-    content?: Nullable<string>;
+    content: string;
 }
 
 export class FindCommentInput {
@@ -134,6 +136,8 @@ export abstract class IMutation {
 
 export class Comments {
     _id: string;
+    postId: string;
+    userId: string;
     content: string;
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -174,8 +178,4 @@ export class UsersRelationships {
 }
 
 export type DateTime = any;
-export type CategoriesUnion = Categories | CategoriesRelationships;
-export type CommentsUnion = Comments | CommentsRelationships;
-export type PostsUnion = Posts | PostsRelationships;
-export type UsersUnion = Users | UsersRelationships;
 type Nullable<T> = T | null;

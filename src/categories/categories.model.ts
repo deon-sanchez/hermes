@@ -11,7 +11,7 @@ export class Categories {
   _id: MongooseSchema.Types.ObjectId;
 
   @Field()
-  @Prop({ type: String, required: true })
+  @Prop({ required: true, unique: true })
   name: string;
 
   @Field()

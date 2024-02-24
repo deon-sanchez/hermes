@@ -1,7 +1,5 @@
 scalar DateTime
 
-union UsersUnion = Users | UsersRelationships
-
 type Users {
   _id: ID!
   name: String!

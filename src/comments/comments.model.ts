@@ -8,23 +8,25 @@ import { Posts } from '../posts/posts.model';
 @ObjectType()
 @Schema({ timestamps: true })
 export class Comments {
-  @Field(() => String)
+  @Field()
   _id: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
+  @Field()
+  @Prop({ required: true })
   postId: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
+  @Field()
+  @Prop({ required: true })
   userId: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
-  @Prop({ type: String, required: true })
+  @Field()
+  @Prop({ required: true })
   content: string;
 
-  @Field(() => Date)
+  @Field()
   createdAt: Date;
 
-  @Field(() => Date)
+  @Field()
   updatedAt: Date;
 
   // @Field(() => [Users])
