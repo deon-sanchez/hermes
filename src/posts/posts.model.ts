@@ -35,17 +35,17 @@ export class Posts {
   @Field()
   updatedAt: Date;
 
-  // @Field(() => [Users])
-  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Users' }] })
-  // users: Users[];
+  @Field()
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Users' }] })
+  user: Users;
 
-  // @Field(() => [Comments])
-  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Comments' }] })
-  // comments: Comments[];
+  @Field()
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Comments' }] })
+  comments: Comments[];
 
-  // @Field(() => [Categories])
-  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Categories' }] })
-  // categories: Categories[];
+  @Field()
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Categories' }] })
+  category: Categories;
 }
 
 export const PostsSchema = SchemaFactory.createForClass(Posts);

@@ -8,12 +8,9 @@ type Posts {
   content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-}
-
-type PostsRelationships {
-  users: [Users!]!
+  user: Users!
   comments: [Comments!]!
-  categories: [Categories!]!
+  category: Categories!
 }
 
 type Query {

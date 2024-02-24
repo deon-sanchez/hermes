@@ -66,21 +66,21 @@ export class PostsResolver {
     return this.postsService.delete(_id);
   }
 
-  // @ResolveField()
-  // async categories(@Parent() post: Posts) {
-  //   const { categoryId } = post;
-  //   return this.categoriesServices.findOne({ _id: categoryId });
-  // }
+  @ResolveField()
+  async category(@Parent() post: Posts) {
+    const { categoryId } = post;
+    return this.categoriesServices.findOne({ _id: categoryId });
+  }
 
-  // @ResolveField()
-  // async comments(@Parent() post: Posts) {
-  //   const { _id } = post;
-  //   return this.commentsServices.findAll({ postId: _id });
-  // }
+  @ResolveField()
+  async comments(@Parent() post: Posts) {
+    const { _id } = post;
+    return this.commentsServices.findAll({ postId: _id, userId: null });
+  }
 
-  // @ResolveField()
-  // async users(@Parent() post: Posts) {
-  //   const { _id } = post;
-  //   return this.usersServices.findAll({ postId: _id });
-  // }
+  @ResolveField()
+  async user(@Parent() post: Posts) {
+    const { userId } = post;
+    return this.usersServices.findOne({ _id: userId, email: null });
+  }
 }

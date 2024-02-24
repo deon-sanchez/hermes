@@ -150,12 +150,9 @@ export class Posts {
     content: string;
     createdAt: DateTime;
     updatedAt: DateTime;
-}
-
-export class PostsRelationships {
-    users: Users[];
+    user: Users;
     comments: Comments[];
-    categories: Categories[];
+    category: Categories;
 }
 
 export class Users {
