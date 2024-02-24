@@ -11,10 +11,10 @@ import { Schema as MongooseSchema } from 'mongoose';
 import { PostsService } from 'src/posts/posts.service';
 import { Posts } from 'src/posts/posts.model';
 import {
-  CreatePostsInput,
+  CreatePostInput,
   FindPostInput,
   FindPostsInput,
-  UpdatePostsInput,
+  UpdatePostInput,
 } from 'src/posts/posts.input';
 import { UsersService } from 'src/users/users.service';
 import { CategoriesService } from 'src/categories/categories.service';
@@ -29,7 +29,7 @@ export class PostsResolver {
     private readonly commentsServices: CommentsService,
   ) {}
 
-  @Query(() => [Posts])
+  @Query()
   async posts(
     @Args('findPostsInput')
     findPostsInput: FindPostsInput,
@@ -37,7 +37,7 @@ export class PostsResolver {
     return this.postsService.findAll(findPostsInput);
   }
 
-  @Query(() => Posts)
+  @Query()
   async post(
     @Args('findPostsInput')
     findPostInput: FindPostInput,
@@ -45,42 +45,42 @@ export class PostsResolver {
     return this.postsService.findOne(findPostInput);
   }
 
-  @Mutation(() => Posts, { name: 'createPosts' })
-  async createPosts(
-    @Args('createPostsInput') createPostsInput: CreatePostsInput,
+  @Mutation()
+  async createPost(
+    @Args('createPostInput') createPostInput: CreatePostInput,
   ): Promise<Posts> {
-    return this.postsService.create(createPostsInput);
+    return this.postsService.create(createPostInput);
   }
 
-  @Mutation(() => Posts, { name: 'updatePosts' })
-  async updatePosts(
-    @Args('updatePostsInput') updatePostsInput: UpdatePostsInput,
+  @Mutation()
+  async updatePost(
+    @Args('updatePostInput') updatePostInput: UpdatePostInput,
   ): Promise<Posts> {
-    return this.postsService.update(updatePostsInput._id, updatePostsInput);
+    return this.postsService.update(updatePostInput._id, updatePostInput);
   }
 
-  @Mutation(() => Posts, { name: 'deletePosts' })
-  async deletePosts(
+  @Mutation()
+  async deletePost(
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
   ): Promise<Posts> {
     return this.postsService.delete(_id);
   }
 
-  @ResolveField()
-  async categories(@Parent() post: Posts) {
-    const { _id } = post;
-    return this.categoriesServices.findAll({ postId: _id });
-  }
+  // @ResolveField()
+  // async categories(@Parent() post: Posts) {
+  //   const { categoryId } = post;
+  //   return this.categoriesServices.findOne({ _id: categoryId });
+  // }
 
-  @ResolveField()
-  async comments(@Parent() post: Posts) {
-    const { _id } = post;
-    return this.commentsServices.findAll({ postId: _id });
-  }
+  // @ResolveField()
+  // async comments(@Parent() post: Posts) {
+  //   const { _id } = post;
+  //   return this.commentsServices.findAll({ postId: _id });
+  // }
 
-  @ResolveField()
-  async users(@Parent() post: Posts) {
-    const { _id } = post;
-    return this.usersServices.findAll({ postId: _id });
-  }
+  // @ResolveField()
+  // async users(@Parent() post: Posts) {
+  //   const { _id } = post;
+  //   return this.usersServices.findAll({ postId: _id });
+  // }
 }

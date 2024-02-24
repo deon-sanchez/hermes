@@ -42,15 +42,15 @@ export class UsersResolver {
     return this.usersService.create(createUserInput);
   }
 
-  @ResolveField()
-  async comments(@Parent() users: Users) {
-    const { _id } = users;
-    return this.commentsService.findAll({ userId: _id });
-  }
+  // @ResolveField()
+  // async comments(@Parent() users: Users) {
+  //   const { _id } = users;
+  //   return this.commentsService.findAll({ userId: _id });
+  // }
 
-  @ResolveField()
-  async posts(@Parent() users: Users) {
-    const { _id } = users;
-    return this.postsService.findAll({ userId: _id });
-  }
+  // @ResolveField()
+  // async posts(@Parent() users: Users) {
+  //   const { _id } = users;
+  //   return this.postsService.findAll({ userId: _id });
+  // }
 }

@@ -1,13 +1,17 @@
 scalar DateTime
 
+union CommentsUnion = Comments | CommentsRelationships
+
 type Comments {
   _id: String!
   content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type CommentsRelationships {
   users: [Users!]!
   posts: [Posts!]!
-
 }
 
 type Query {

@@ -1,6 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema } from 'mongoose';
+import { Document, Schema as MongooseSchema, Types } from 'mongoose';
+import { IsNotEmpty } from 'class-validator';
 
 import { Comments } from '../comments/comments.model';
 import { Categories } from '../categories/categories.model';
@@ -9,43 +10,42 @@ import { Users } from '../users/users.model';
 @ObjectType()
 @Schema({ timestamps: true })
 export class Posts {
-  @Field(() => String)
+  @Field()
   _id: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
+  @Field()
+  @Prop()
   categoryId: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
+  @Field()
+  @Prop()
   userId: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
-  commentId: MongooseSchema.Types.ObjectId;
-
-  @Field(() => String)
-  @Prop({ type: String, required: true })
+  @Field()
+  @Prop()
   title: string;
 
-  @Field(() => String)
-  @Prop({ type: String, required: true })
+  @Field()
+  @Prop()
   content: string;
 
-  @Field(() => Date)
+  @Field()
   createdAt: Date;
 
-  @Field(() => Date)
+  @Field()
   updatedAt: Date;
 
-  @Field(() => [Users])
-  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Users' }] })
-  users: Users[];
+  // @Field(() => [Users])
+  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Users' }] })
+  // users: Users[];
 
-  @Field(() => [Comments])
-  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Comments' }] })
-  comments: Comments[];
+  // @Field(() => [Comments])
+  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Comments' }] })
+  // comments: Comments[];
 
-  @Field(() => [Categories])
-  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Categories' }] })
-  categories: Categories[];
+  // @Field(() => [Categories])
+  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Categories' }] })
+  // categories: Categories[];
 }
 
 export const PostsSchema = SchemaFactory.createForClass(Posts);

@@ -8,7 +8,6 @@ import {
 } from 'src/categories/categories.model';
 import {
   CreateCategoryInput,
-  FindCategoriesInput,
   FindCategoryInput,
   UpdateCategoryInput,
 } from 'src/categories/categories.input';
@@ -20,16 +19,9 @@ export class CategoriesService {
     private categoryModel: Model<CategoriesDocument>,
   ) {}
 
-  async findAll(
-    findCategoriesInput: FindCategoriesInput,
-  ): Promise<Categories[]> {
+  async findAll(): Promise<Categories[]> {
     try {
-      if (findCategoriesInput.postId) {
-        return await this.categoryModel
-          .find({ postId: findCategoriesInput.postId })
-          .exec();
-      }
-      return this.categoryModel.find().exec();
+      return await this.categoryModel.find().exec();
     } catch (error) {
       throw new InternalServerErrorException('Error finding categories');
     }
@@ -37,7 +29,7 @@ export class CategoriesService {
 
   async findOne(findCategoryInput: FindCategoryInput): Promise<Categories> {
     const category = await this.categoryModel
-      .findById(findCategoryInput._id)
+      .findById(findCategoryInput?._id)
       .exec();
 
     if (!category) {

@@ -1,11 +1,16 @@
 scalar DateTime
 
+union UsersUnion = Users | UsersRelationships
+
 type Users {
-  _id: String!
+  _id: ID!
   name: String!
   email: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type UsersRelationships {
   comments: [Comments!]!
   posts: [Posts!]!
 }
@@ -31,6 +36,6 @@ input FindUserInput {
 }
 
 input FindUsersInput {
-  postId: String
-  commentId: String
+  postId: ID
+  commentId: ID
 }

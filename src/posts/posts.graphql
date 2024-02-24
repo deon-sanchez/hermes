@@ -1,11 +1,18 @@
 scalar DateTime
 
+union PostsUnion = Posts | PostsRelationships
+
 type Posts {
-  _id: String!
+  _id: ID!
+  categoryId: ID!
+  userId: ID!
   title: String!
   content: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type PostsRelationships {
   users: [Users!]!
   comments: [Comments!]!
   categories: [Categories!]!
@@ -18,28 +25,30 @@ type Query {
 
 
 type Mutation {
-  createPosts(createPostsInput: CreatePostsInput!): Posts!
-  updatePosts(updatePostsInput: UpdatePostsInput!): Posts!
-  deletePosts(_id: String!): Posts!
+  createPost(createPostInput: CreatePostInput!): Posts!
+  updatePost(updatePostInput: UpdatePostInput!): Posts!
+  deletePost(_id: String!): Posts!
 }
 
-input CreatePostsInput {
+input CreatePostInput {
+  title: String!
+  content: String!
+  userId: ID!
+  categoryId: ID!
+}
+
+input UpdatePostInput {
+  _id: ID!
   title: String!
   content: String!
 }
 
-input UpdatePostsInput {
-  _id: String!
-  title: String
-  content: String
-}
-
 input FindPostInput {
-   _id: String!
+   _id: ID!
 }
 
 input FindPostsInput {
-  categoryId: String
-  userId: String
-  commentId: String
+  categoryId: ID
+  userId: ID
+  commentId: ID
 }

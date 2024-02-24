@@ -4,10 +4,10 @@ import { Model, Schema as MongooseSchema } from 'mongoose';
 
 import { PostsDocument, Posts } from 'src/posts/posts.model';
 import {
-  CreatePostsInput,
+  CreatePostInput,
   FindPostInput,
   FindPostsInput,
-  UpdatePostsInput,
+  UpdatePostInput,
 } from 'src/posts/posts.input';
 
 @Injectable()
@@ -16,8 +16,8 @@ export class PostsService {
     @InjectModel(Posts.name) private postsModel: Model<PostsDocument>,
   ) {}
 
-  async create(createPostsDto: CreatePostsInput): Promise<Posts> {
-    const createdPosts = new this.postsModel(createPostsDto);
+  async create(createPostInput: CreatePostInput): Promise<Posts> {
+    const createdPosts = new this.postsModel(createPostInput);
     return createdPosts.save();
   }
 
@@ -47,7 +47,7 @@ export class PostsService {
 
   async update(
     _id: MongooseSchema.Types.ObjectId,
-    updatePostsDto: UpdatePostsInput,
+    updatePostsDto: UpdatePostInput,
   ): Promise<Posts> {
     return this.postsModel
       .findByIdAndUpdate(_id, updatePostsDto, {

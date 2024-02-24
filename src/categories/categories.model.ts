@@ -7,29 +7,26 @@ import { Posts } from '../posts/posts.model';
 @ObjectType()
 @Schema({ timestamps: true })
 export class Categories {
-  @Field(() => String)
+  @Field()
   _id: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
-  postId: MongooseSchema.Types.ObjectId;
-
-  @Field(() => String)
+  @Field()
   @Prop({ type: String, required: true })
   name: string;
 
-  @Field(() => String)
-  @Prop({ type: String, required: true })
+  @Field()
+  @Prop({ type: String })
   description: string;
 
-  @Field(() => Date)
+  @Field()
   createdAt: Date;
 
-  @Field(() => Date)
+  @Field()
   updatedAt: Date;
 
-  @Field(() => [Posts])
-  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Posts' }] })
-  posts: Posts[];
+  // @Field(() => [Posts])
+  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Posts' }] })
+  // posts: Posts[];
 }
 
 export const CategoriesSchema = SchemaFactory.createForClass(Categories);

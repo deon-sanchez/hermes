@@ -10,23 +10,17 @@
 
 export class CreateCategoryInput {
     name: string;
-    description: string;
-    postId: string;
+    description?: Nullable<string>;
 }
 
 export class UpdateCategoryInput {
     _id: string;
-    name?: Nullable<string>;
+    name: string;
     description?: Nullable<string>;
-    postId: string;
 }
 
 export class FindCategoryInput {
     _id: string;
-}
-
-export class FindCategoriesInput {
-    postId?: Nullable<string>;
 }
 
 export class CreateCommentInput {
@@ -47,15 +41,17 @@ export class FindCommentsInput {
     userId?: Nullable<string>;
 }
 
-export class CreatePostsInput {
+export class CreatePostInput {
     title: string;
     content: string;
+    userId: string;
+    categoryId: string;
 }
 
-export class UpdatePostsInput {
+export class UpdatePostInput {
     _id: string;
-    title?: Nullable<string>;
-    content?: Nullable<string>;
+    title: string;
+    content: string;
 }
 
 export class FindPostInput {
@@ -86,16 +82,18 @@ export class FindUsersInput {
 
 export class Categories {
     _id: string;
-    postId: string;
     name: string;
-    description: string;
+    description?: Nullable<string>;
     createdAt: DateTime;
     updatedAt: DateTime;
+}
+
+export class CategoriesRelationships {
     posts: Posts[];
 }
 
 export abstract class IQuery {
-    abstract categories(findCategoriesInput?: Nullable<FindCategoriesInput>): Categories[] | Promise<Categories[]>;
+    abstract categories(): Categories[] | Promise<Categories[]>;
 
     abstract category(findCategoryInput: FindCategoryInput): Categories | Promise<Categories>;
 
@@ -125,11 +123,11 @@ export abstract class IMutation {
 
     abstract deleteComment(_id: string): Comments | Promise<Comments>;
 
-    abstract createPosts(createPostsInput: CreatePostsInput): Posts | Promise<Posts>;
+    abstract createPost(createPostInput: CreatePostInput): Posts | Promise<Posts>;
 
-    abstract updatePosts(updatePostsInput: UpdatePostsInput): Posts | Promise<Posts>;
+    abstract updatePost(updatePostInput: UpdatePostInput): Posts | Promise<Posts>;
 
-    abstract deletePosts(_id: string): Posts | Promise<Posts>;
+    abstract deletePost(_id: string): Posts | Promise<Posts>;
 
     abstract createUser(createUserInput: CreateUserInput): Users | Promise<Users>;
 }
@@ -139,16 +137,24 @@ export class Comments {
     content: string;
     createdAt: DateTime;
     updatedAt: DateTime;
+}
+
+export class CommentsRelationships {
     users: Users[];
     posts: Posts[];
 }
 
 export class Posts {
     _id: string;
+    categoryId: string;
+    userId: string;
     title: string;
     content: string;
     createdAt: DateTime;
     updatedAt: DateTime;
+}
+
+export class PostsRelationships {
     users: Users[];
     comments: Comments[];
     categories: Categories[];
@@ -160,9 +166,16 @@ export class Users {
     email: string;
     createdAt: DateTime;
     updatedAt: DateTime;
+}
+
+export class UsersRelationships {
     comments: Comments[];
     posts: Posts[];
 }
 
 export type DateTime = any;
+export type CategoriesUnion = Categories | CategoriesRelationships;
+export type CommentsUnion = Comments | CommentsRelationships;
+export type PostsUnion = Posts | PostsRelationships;
+export type UsersUnion = Users | UsersRelationships;
 type Nullable<T> = T | null;

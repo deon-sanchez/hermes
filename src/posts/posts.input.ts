@@ -1,41 +1,54 @@
 import { InputType, Field } from '@nestjs/graphql';
+import { IsNotEmpty } from 'class-validator';
 import { Schema as MongooseSchema } from 'mongoose';
 
 @InputType()
 export class FindPostsInput {
-  @Field(() => String)
-  categoryId?: MongooseSchema.Types.ObjectId;
+  @Field()
+  categoryId: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
-  userId?: MongooseSchema.Types.ObjectId;
+  @Field()
+  userId: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
-  commentId?: MongooseSchema.Types.ObjectId;
+  @Field()
+  commentId: MongooseSchema.Types.ObjectId;
 }
 
 @InputType()
 export class FindPostInput {
-  @Field(() => String)
+  @Field()
   _id: MongooseSchema.Types.ObjectId;
 }
 
 @InputType()
-export class CreatePostsInput {
-  @Field(() => String)
+export class CreatePostInput {
+  @Field()
+  @IsNotEmpty()
   title: string;
 
-  @Field(() => String)
+  @Field()
+  @IsNotEmpty()
   content: string;
+
+  @Field()
+  @IsNotEmpty()
+  userId: MongooseSchema.Types.ObjectId;
+
+  @Field()
+  @IsNotEmpty()
+  categoryId: MongooseSchema.Types.ObjectId;
 }
 
 @InputType()
-export class UpdatePostsInput {
-  @Field(() => String)
+export class UpdatePostInput {
+  @Field()
   _id: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String, { nullable: true })
-  title?: string;
+  @Field()
+  @IsNotEmpty()
+  title: string;
 
-  @Field(() => String, { nullable: true })
-  content?: string;
+  @Field()
+  @IsNotEmpty()
+  content: string;
 }

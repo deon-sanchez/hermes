@@ -1,17 +1,21 @@
 scalar DateTime
 
+union CategoriesUnion = Categories | CategoriesRelationships
+
 type Categories {
-  _id: String!
-  postId: String!
+  _id: ID!
   name: String!
-  description: String!
+  description: String
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+type CategoriesRelationships {
   posts: [Posts!]!
 }
 
 type Query {
-  categories(findCategoriesInput: FindCategoriesInput): [Categories!]!
+  categories: [Categories!]!
   category(findCategoryInput: FindCategoryInput!): Categories!
 }
 
@@ -23,21 +27,15 @@ type Mutation {
 
 input CreateCategoryInput {
   name: String!
-  description: String!
-  postId: String!
+  description: String
 }
 
 input UpdateCategoryInput {
-  _id: String!
-  name: String
+  _id: ID!
+  name: String!
   description: String
-  postId: String!
 }
 
 input FindCategoryInput {
-  _id: String!
-}
-
-input FindCategoriesInput {
-  postId: String
+  _id: ID!
 }

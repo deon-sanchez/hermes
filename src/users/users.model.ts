@@ -8,40 +8,40 @@ import { Posts } from '../posts/posts.model';
 @ObjectType()
 @Schema({ timestamps: true })
 export class Users {
-  @Field(() => String)
+  @Field()
   _id: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
+  @Field()
   postId: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
+  @Field()
   commentId: MongooseSchema.Types.ObjectId;
 
-  @Field(() => String)
+  @Field()
   @Prop({ type: String, required: true })
   name: string;
 
-  @Field(() => String)
-  @Prop({ type: String, required: true })
+  @Field()
+  @Prop({ type: String, required: true, unique: true })
   email: string;
 
   @HideField()
   @Prop({ type: String, required: true })
   password: string;
 
-  @Field(() => Date)
+  @Field()
   createdAt: Date;
 
-  @Field(() => Date)
+  @Field()
   updatedAt: Date;
 
-  @Field(() => [Comments])
-  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Comments' }] })
-  comments: Comments[];
+  // @Field()
+  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Comments' }] })
+  // comments: Comments[];
 
-  @Field(() => [Posts])
-  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Posts' }] })
-  posts: Posts[];
+  // @Field()
+  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Posts' }] })
+  // posts: Posts[];
 }
 
 export const UsersSchema = SchemaFactory.createForClass(Users);

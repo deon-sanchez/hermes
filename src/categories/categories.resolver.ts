@@ -10,7 +10,6 @@ import { Schema as MongooseSchema } from 'mongoose';
 
 import {
   CreateCategoryInput,
-  FindCategoriesInput,
   FindCategoryInput,
   UpdateCategoryInput,
 } from 'src/categories/categories.input';
@@ -28,10 +27,8 @@ export class CategoriesResolver {
   ) {}
 
   @Query(() => [Categories])
-  async categories(
-    @Args('findCategoriesInput') findCategoriesInput: FindCategoriesInput,
-  ): Promise<Categories[]> {
-    return this.categoriesService.findAll(findCategoriesInput);
+  async categories(): Promise<Categories[]> {
+    return this.categoriesService.findAll();
   }
 
   @Query(() => Categories)
@@ -65,9 +62,9 @@ export class CategoriesResolver {
     return this.categoriesService.delete(_id);
   }
 
-  @ResolveField()
-  async posts(@Parent() category: Categories) {
-    const { _id } = category;
-    return this.postsService.findAll({ categoryId: _id });
-  }
+  // @ResolveField()
+  // async posts(@Parent() category: Categories) {
+  //   const { _id } = category;
+  //   return this.postsService.findAll({ categoryId: _id });
+  // }
 }
