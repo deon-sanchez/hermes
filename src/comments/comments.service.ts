@@ -28,6 +28,11 @@ export class CommentsService {
         .find({ postId: findCommentsInput.postId })
         .exec();
     }
+    if (findCommentsInput?.userId) {
+      return this.commentsModel
+        .find({ userId: findCommentsInput.userId })
+        .exec();
+    }
     return this.commentsModel.find().exec();
   }
 

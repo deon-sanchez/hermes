@@ -6,9 +6,6 @@ type Categories {
   description: String
   createdAt: DateTime!
   updatedAt: DateTime!
-}
-
-type CategoriesRelationships {
   posts: [Posts!]!
 }
 

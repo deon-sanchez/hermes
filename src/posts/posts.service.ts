@@ -24,15 +24,17 @@ export class PostsService {
   async findAll(findPostsInput: FindPostsInput): Promise<Posts[]> {
     if (findPostsInput?.categoryId) {
       return await this.postsModel
-        .find({ _id: findPostsInput.categoryId })
+        .find({ categoryId: findPostsInput.categoryId })
         .exec();
     }
     if (findPostsInput?.userId) {
-      return await this.postsModel.find({ _id: findPostsInput.userId }).exec();
+      return await this.postsModel
+        .find({ userId: findPostsInput.userId })
+        .exec();
     }
     if (findPostsInput?.commentId) {
       return await this.postsModel
-        .find({ _id: findPostsInput.commentId })
+        .find({ commentId: findPostsInput.commentId })
         .exec();
     }
 

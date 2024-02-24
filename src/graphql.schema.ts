@@ -88,9 +88,6 @@ export class Categories {
     description?: Nullable<string>;
     createdAt: DateTime;
     updatedAt: DateTime;
-}
-
-export class CategoriesRelationships {
     posts: Posts[];
 }
 
@@ -167,9 +164,6 @@ export class Users {
     email: string;
     createdAt: DateTime;
     updatedAt: DateTime;
-}
-
-export class UsersRelationships {
     comments: Comments[];
     posts: Posts[];
 }

@@ -6,9 +6,6 @@ type Users {
   email: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-}
-
-type UsersRelationships {
   comments: [Comments!]!
   posts: [Posts!]!
 }

@@ -24,9 +24,9 @@ export class Categories {
   @Field()
   updatedAt: Date;
 
-  // @Field(() => [Posts])
-  // @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Posts' }] })
-  // posts: Posts[];
+  @Field()
+  @Prop({ type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Posts' }] })
+  posts: Posts[];
 }
 
 export const CategoriesSchema = SchemaFactory.createForClass(Categories);

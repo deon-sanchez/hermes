@@ -62,9 +62,13 @@ export class CategoriesResolver {
     return this.categoriesService.delete(_id);
   }
 
-  // @ResolveField()
-  // async posts(@Parent() category: Categories) {
-  //   const { _id } = category;
-  //   return this.postsService.findAll({ categoryId: _id });
-  // }
+  @ResolveField()
+  async posts(@Parent() category: Categories) {
+    const { _id } = category;
+    return this.postsService.findAll({
+      categoryId: _id,
+      userId: null,
+      commentId: null,
+    });
+  }
 }
