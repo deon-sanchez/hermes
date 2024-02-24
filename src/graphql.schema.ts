@@ -141,11 +141,8 @@ export class Comments {
     content: string;
     createdAt: DateTime;
     updatedAt: DateTime;
-}
-
-export class CommentsRelationships {
-    users: Users[];
-    posts: Posts[];
+    user: Users;
+    post: Posts;
 }
 
 export class Posts {
